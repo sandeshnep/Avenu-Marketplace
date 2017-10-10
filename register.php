@@ -41,7 +41,7 @@
                     <a class="nav-link" href="profile.php">Profile</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="logout.php">Logout</a>
+                    <a class="nav-link" href="includes/logout.php">Logout</a>
                     </li>';
                 }
                 ?>
@@ -54,42 +54,34 @@
         <br>
 
         <?php
-    require('includes/db.php');
-    // If form submitted, insert values into the database.
-    if (isset($_POST['username']) && isset($_POST['password']) == isset($_POST['password2'])) {
-        // removes backslashes
-        //escapes special characters in a string
-        $firstname = stripslashes($_POST['firstname']);
-        $firstname = mysqli_real_escape_string($con, $firstname);
-        $lastname = stripslashes($_POST['lastname']);
-        $lastname = mysqli_real_escape_string($con, $lastname);
-        $username = stripslashes($_POST['username']);
-        $username = mysqli_real_escape_string($con, $username);
-        $email = stripslashes($_POST['email']);
-        $email = mysqli_real_escape_string($con, $email);
-        $password = stripslashes($_POST['password']);
-        $password = mysqli_real_escape_string($con, $password);
-        $password2 = stripslashes($_POST['password2']);
-        $password2 = mysqli_real_escape_string($con, $password2);
-        $query = "INSERT INTO `users`(`firstname`, `lastname`, `username`, `email`, `password`) 
-        VALUES ([$firstname],[$lastname],[$username],[$email],.md5[$password])";
-        $result = mysqli_query($con, $query);
-        if ($result) {
-            echo '<div class="jumbotron alert-success">
-            <h3>Registered successfully.</h3>
-            <div class="lead">Click here to <a href="login.php">login</a></div>
-            </div>';
-        } else { echo '<div class="jumbotron alert-danger">
-            <h3>Failed to register.</h3>
-            <div class="lead">Click here to <a href="register.php">try again</a></div>
-            </div>';
-        }
-    } else {
-?>
+        require('includes/db.php');
+        // If form submitted, insert values into the database.
+        if (isset($_POST['username']) && (isset($_POST['password']) == isset($_POST['password2']))){
+            $firstname = stripslashes($_POST['firstname']);
+            $lastname = stripslashes($_POST['lastname']);
+            $username = stripslashes($_POST['username']);
+            $email = stripslashes($_POST['email']);
+            $password = stripslashes($_POST['password']);
+    
+            $query = "INSERT INTO `users` (firstname, lastname, username, password, email) VALUES ('$firstname', '$lastname', '$username', '$password', '$email')";
+            $result = mysqli_query($connect, $query);
+            if($result){
+                echo '<div class="jumbotron alert-success">
+                <h3>Registered successfully.</h3>
+                <div class="lead">Click here to <a href="login.php">login</a></div>
+                </div>';
+            } else { echo '<div class="jumbotron alert-danger">
+                <h3>Failed to register.</h3>
+                <div class="lead">Click here to <a href="register.php">try again</a></div>
+                </div>';
+            }
+        } else {
+        ?>
+
         <h2>Register for an account</h2>
         <br>
 
-        <form action="" method="post" name="registration">
+        <form action="" method="POST" name="registration">
             <div class="row">
             <div class="col">
             <div class="form-group">
