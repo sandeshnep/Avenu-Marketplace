@@ -64,16 +64,25 @@
             $password = stripslashes($_POST['password']);
     
             $query = "INSERT INTO `users` (firstname, lastname, username, password, email) VALUES ('$firstname', '$lastname', '$username', '$password', '$email')";
-            $result = mysqli_query($connect, $query);
-            if($result){
-                echo '<div class="jumbotron alert-success">
-                <h3>Registered successfully.</h3>
-                <div class="lead">Click here to <a href="login.php">login</a></div>
-                </div>';
-            } else { echo '<div class="jumbotron alert-danger">
-                <h3>Failed to register.</h3>
-                <div class="lead">Click here to <a href="register.php">try again</a></div>
-                </div>';
+            $usercheck = "SELECT * FROM `users` WHERE username='$username'";
+            $result = mysqli_query($connect, $usercheck);
+            $count = mysqli_num_rows($result);
+            if ($count == 1) {
+                echo '<div class="lead text-danger">Please use another username</div>
+                <div class="lead">Click here to <a href="register.php">try again</a></div>';
+            } else {
+                $result = mysqli_query($connect, $query);
+                if($result){
+                    echo '<div class="jumbotron alert-success">
+                    <h3>Registered successfully.</h3>
+                    <div class="lead">Click here to <a href="login.php">login</a></div>
+                    </div>';
+                } else { 
+                    echo '<div class="jumbotron alert-danger">
+                    <h3>Failed to register.</h3>
+                    <div class="lead">Click here to <a href="register.php">try again</a></div>
+                    </div>';
+                }
             }
         } else {
         ?>
@@ -99,6 +108,7 @@
             <div class="form-group">
                 <label for="username">User Name</label>
                 <input type="text" class="form-control" name="username" id="username" placeholder="Enter desired username">
+                <span id="usernameResult"></span>
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
@@ -119,9 +129,38 @@
 
     <br>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <footer class="bg-dark pt-3 pb-3">
+        <div class="container">
+            <div class="text-muted">
+                <h3>Contact us <a href="contact.php">here</a></h3>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#usernameLoading').hide();
+            $('#username').keyup(function () {
+                $('#usernameLoading').show();
+                $.post("includes/check.php", {
+                    username: $('#username').val()
+                }, function (response) {
+                    $('#usernameResult').fadeOut();
+                    setTimeout("finishAjax('usernameResult', '" + escape(response) + "')", 400);
+                });
+                return false;
+            });
+        });
+
+        function finishAjax(id, response) {
+            $('#usernameLoading').hide();
+            $('#' + id).html(unescape(response));
+            $('#' + id).fadeIn();
+        } //finishAjax
+    </script>
 <?php } ?>
 </body>
 </html>
