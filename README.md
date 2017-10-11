@@ -1,6 +1,6 @@
 # CSC 210 project README file
 
-    By Zubair, Lydia, Teron, Sandy, and Rhythm
+    By Zubair, Lydia, Teron, Sandesh, and Rhythm
 
 ## (Current) Functionalities
 
