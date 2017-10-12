@@ -63,7 +63,7 @@
             $email = stripslashes($_POST['email']);
             $password = stripslashes($_POST['password']);
     
-            $query = "INSERT INTO `users` (firstname, lastname, username, password, email) VALUES ('$firstname', '$lastname', '$username', '$password', '$email')";
+            $query = "INSERT INTO `users` (firstname, lastname, username, password, email) VALUES ('$firstname', '$lastname', '$username', 'md5($password)', '$email')";
             $usercheck = "SELECT * FROM `users` WHERE username='$username'";
             $result = mysqli_query($connect, $usercheck);
             $count = mysqli_num_rows($result);
