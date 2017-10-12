@@ -77,7 +77,7 @@
             echo '<div class="jumbotron alert-danger">
             <h3>Failed to login.</h3>
             <div class="lead">Incorrect username or password</div>
-            <div class="lead">Click here to <a href="register.php">try again</a></div>
+            <div class="lead">Click here to <a href="login.php">try again</a></div>
             </div>';
         }
     } else {
