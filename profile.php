@@ -56,7 +56,7 @@ include("includes/auth.php");
     <div class="jumbotron rounded-0">
         <div class="container">
             <h2>Profile page</h2>
-            <p class="text-lead">Welcome <?php echo $_SESSION['username']; ?>!</p>
+            <p class="text-lead">Welcome <?php echo $_SESSION['firstname']; ?>!</p>
             <p><a href="logout.php">Logout</a></p>
         </div>
     </div>
