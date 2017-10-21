@@ -1,9 +1,9 @@
 <?php
 
 $host = "localhost"; // Host name
-$db_username = "root"; // Mysql username
-$password = ""; // Mysql password
-$db_name = "register"; // Database name
+$db_username = "team24"; // Mysql username
+$password = "marketplace"; // Mysql password
+$db_name = "registration"; // Database name
 
 $connect = mysqli_connect($host, $db_username, $password, $db_name);
 // Check connection
