@@ -24,14 +24,14 @@
             ?>
             <?php 
             if(isset($_SESSION["username"])) {
-                echo 
-                '<li class="nav-item">
-                <a class="nav-link" href="profile.php">Profile</a>
+                ?>
+                <li class="nav-item">
+                <a class="nav-link" href="profile.php"><?php echo $_SESSION['firstname'] ?></a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="includes/logout.php">Logout</a>
-                </li>';
-            }
+                </li>
+          <?php ;  }
             ?>
         </ul>
         </div>
