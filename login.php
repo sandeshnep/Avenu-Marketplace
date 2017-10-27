@@ -13,7 +13,7 @@
 
     
     <?php
-include("includes/navigation-bar.php");
+    include("includes/navigation-bar.php");
 ?>
 
     <div class="container">
@@ -33,6 +33,10 @@ include("includes/navigation-bar.php");
         if ($rows == 1) {
             $_SESSION['username'] = $username;
             $_SESSION['loggedin'] = true;
+
+            $cookie_name = "user";
+            $cookie_value = $_SESSION['username'];
+            setcookie($cookie_name, $cookie_value, time()+86400); //expires in one day
 
             $profile = mysqli_fetch_assoc($result);
             $_SESSION['firstname'] = $profile['firstname'];
