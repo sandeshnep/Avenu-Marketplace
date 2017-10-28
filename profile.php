@@ -9,7 +9,7 @@ include("includes/auth.php");
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 
@@ -20,13 +20,28 @@ include("includes/auth.php");
 include("includes/navigation-bar.php");
 ?>
 
-    <div class="jumbotron rounded-0">
+    <div class="jumbotron p-tron">
         <div class="container">
-            <h2>Profile page</h2>
-            <p class="text-lead">Welcome <?php echo $_SESSION['firstname']; ?>!</p>
-            <p><a href="logout.php">Logout</a></p>
+            <div class="hero-image">
+            <div class="hero-text">
+            <h1><?php echo ' I am ' . $_SESSION['firstname'] ?></h1>
+            <button class = "btn btn-edit" onclick ="myEdit()">Edit Profile</button>
         </div>
     </div>
+            <!-- <h2>Profile page</h2>
+            <p class="text-lead">Welcome <?php echo $_SESSION['firstname']; ?>!</p>
+            <p><a href="logout.php">Logout</a></p> -->
+        </div>
+    </div> 
+
+    <script>
+        function myEdit()
+        {
+
+        }
+    </script>
+
+
 
     <div class="container">
 
