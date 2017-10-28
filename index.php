@@ -40,7 +40,7 @@ include("includes/navigation-bar.php");
                 items to your profile that you want to sell, or browse others' profiles for things to buy.
             </p>
             <p>See something you like? Simply click "BUY NOW" and fill in your purchase info. We'll take care of the rest.</p>
-            <p>For a complete list of rules and regulations, click <a href="includes/rules.php">here.</a></p>
+            <p>For a complete list of rules and regulations, click <a href="rules.php">here.</a></p>
         </article>
 
     </div>

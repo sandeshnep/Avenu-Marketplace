@@ -1,5 +1,5 @@
 .p-tron {
-    background-image: url("test.jpg");
+    background-image: url("simple-pattern-background_1319-147.png");
     
 }
 
@@ -37,7 +37,7 @@ jumbotron {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #343a40!important;
+    color: white!important;
 }
 
 .btn-edit {
