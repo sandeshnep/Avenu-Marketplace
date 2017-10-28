@@ -7,7 +7,10 @@ jumbotron {
     padding: 6rem 2rem;
 }
 
-
+.hide
+{
+    visibility: hidden;
+}
 
 .hero-image {
     /* The image used */
@@ -41,4 +44,11 @@ jumbotron {
     color: #343a40!important;
     background-color: #fff;
     border-color: #343a40!important;
+}
+
+.btn-submit 
+{
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
 }
