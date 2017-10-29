@@ -20,8 +20,8 @@ if(!isset($_COOKIE[$cookie_name])) {
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -36,7 +36,9 @@ if(!isset($_COOKIE[$cookie_name])) {
 
     <?php
         require_once('includes/db.php');
-        session_start();
+        if(!isset($_SESSION['username'])) {
+            session_start();
+        }
         // If form submitted, insert values into the database.
     if (isset($_POST['submit']) and isset($_POST['password'])) {
         $username = $_POST['username'];

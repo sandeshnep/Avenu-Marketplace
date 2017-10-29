@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION['username'])) {
+    session_start();
+}
 ?>
 
 
@@ -51,8 +53,8 @@ $result = mysqli_query($connect, $query) or die(mysqli_error());
 <body>
 
     <?php
-include("includes/navigation-bar.php");
-?>
+    include("includes/navigation-bar.php");
+    ?>
 
 
     <div class="jumbotron rounded-0">
