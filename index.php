@@ -65,7 +65,7 @@ include("includes/navigation-bar.php");
             ?>
             <?php 
             if(!isset($_SESSION["username"])) {
-                echo '<h1>Welcome to Avenue</h1>
+                echo '<h1>Welcome to Avenu</h1>
                 <p class="text-lead">Login to begin buying and selling.</p>
                 <a class="btn btn-dark" href="login.php">Login</a>
                 <a class="btn btn-primary" href="register.php">Register</a>';
