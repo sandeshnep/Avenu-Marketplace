@@ -107,6 +107,31 @@ include("includes/navigation-bar.php");
     </div>
     </div>
 
+    <div class="container">
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Item 1</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Item 2</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Item 3</th>
+                <td></td>
+            </tr>
+        </table>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
+
     <br>
 
     <?php include("includes/footer.php"); ?>

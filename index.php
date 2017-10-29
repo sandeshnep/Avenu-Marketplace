@@ -57,11 +57,17 @@ include("includes/navigation-bar.php");
 
     <div class="jumbotron rounded-0">
         <div class="container">
-            <h1>Welcome to Avenu</h1>
-            <p class="text-lead">Login to begin buying and selling.</p>
+            <?php 
+            if(!empty($_SESSION["username"])) {
+                echo '<h1>Welcome Back to Avenu</h1> 
+                <p class="text-lead">Go to your profile to begin!</p>';
+            }
+            ?>
             <?php 
             if(!isset($_SESSION["username"])) {
-                echo '<a class="btn btn-dark" href="login.php">Login</a>
+                echo '<h1>Welcome to Avenue</h1>
+                <p class="text-lead">Login to begin buying and selling.</p>
+                <a class="btn btn-dark" href="login.php">Login</a>
                 <a class="btn btn-primary" href="register.php">Register</a>';
             }
             ?>
