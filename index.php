@@ -44,8 +44,8 @@ $result = mysqli_query($connect, $query) or die(mysqli_error());
     <title>Home | CSC210 Project</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -57,11 +57,17 @@ include("includes/navigation-bar.php");
 
     <div class="jumbotron rounded-0">
         <div class="container">
-            <h2>Home Page</h2>
-            <p class="text-lead">This will be our landing page</p>
+            <?php 
+            if(!empty($_SESSION["username"])) {
+                echo '<h1>Welcome Back to Avenu</h1> 
+                <p class="text-lead">Go to your profile to begin!</p>';
+            }
+            ?>
             <?php 
             if(!isset($_SESSION["username"])) {
-                echo '<a class="btn btn-dark" href="login.php">Login</a>
+                echo '<h1>Welcome to Avenue</h1>
+                <p class="text-lead">Login to begin buying and selling.</p>
+                <a class="btn btn-dark" href="login.php">Login</a>
                 <a class="btn btn-primary" href="register.php">Register</a>';
             }
             ?>
@@ -72,8 +78,11 @@ include("includes/navigation-bar.php");
 
         <article>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quis ad reprehenderit vel debitis. Corporis fuga illo magnam, dolores eos reprehenderit quod quas culpa officiis repellat iste soluta non asperiores alias sapiente tenetur sit earum dolorem quia quo itaque odit ratione. Harum quisquam, ipsam voluptate obcaecati voluptas minima iste rem quam ea modi hic id! Suscipit itaque distinctio officiis, nisi quas quasi recusandae eius culpa similique veritatis vitae reiciendis nemo quaerat consequuntur quisquam fuga aspernatur ad magni. Exercitationem, explicabo illum nemo velit reprehenderit tenetur quibusdam quasi, quod eligendi voluptates enim sed nihil maiores dignissimos voluptatem consectetur dicta. Eveniet error ad suscipit fuga necessitatibus repellendus obcaecati. Dolore rerum reprehenderit dolorem consequatur, tempora adipisci necessitatibus maiores, expedita quia fugit est accusamus libero cupiditate. Est at commodi error id cupiditate sapiente, deserunt vel? Modi similique id doloribus suscipit mollitia. Dolorem, ullam fugiat animi eius veritatis officiis sapiente placeat aperiam eaque ea debitis ab ut quibusdam aut corrupti molestias quia inventore quas illo tenetur harum autem! Quis, reiciendis. Excepturi, aspernatur! Unde, numquam quas quaerat magnam ipsam saepe eveniet aut qui sunt non ab recusandae quod porro cumque enim facilis cum laborum illum quo inventore temporibus, at magni praesentium? Maxime modi soluta illum ipsum ipsa officiis magnam culpa numquam error. Sit repellendus sed optio id, facere, quo vero sapiente saepe aut, animi ex nemo veritatis magni cum? Dignissimos quasi accusamus numquam sit quod ullam dolorum voluptatum eos obcaecati similique, inventore rerum, magni ab dolor ratione ex consectetur nobis dicta provident? Distinctio incidunt aut quibusdam commodi.
+                Avenu is the first online marketplace desgined specifically for high school students. Upload
+                items to your profile that you want to sell, or browse others' profiles for things to buy.
             </p>
+            <p>See something you like? Simply click "BUY NOW" and fill in your purchase info. We'll take care of the rest.</p>
+            <p>For a complete list of rules and regulations, click <a href="rules.php">here.</a></p>
         </article>
 
     </div>
