@@ -9,6 +9,7 @@
     3. Save logged in sessions in session storage
     4. Logout and destroy session
     5. Retrieve forgotten password
+    6. Persistent Login through cookies (Remember function)
 
 ## Things to work on
 
