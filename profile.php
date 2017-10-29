@@ -45,12 +45,38 @@ include("includes/navigation-bar.php");
         {
         
         document.getElementById('edit-btn').style.visibility = 'hidden';   
+        window.alert("Changey");
+        $('#profile-table')
+        .html('<div id="update"> <div class="container"> <table class="table table-bordered"> <tr> <th>Name</th> <td><input type="text" id="full-name" name="fullname" placeholder="<?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname'];  ?>"></td> </tr> <tr> <th>Username</th> <td><?php echo $_SESSION['username'] ?></td> </tr> <tr> <th>Email address</th> <td><?php echo $_SESSION['email'] ?></td> </tr> </table> <button class ="btn btn-submit" id ="submit-btn" onclick="myUpdate()">Submit</button>  <br> <br> <br> <br> <br> </div> </div> }');
+        }
 
-        jQuery('#profile-table')
-        .replaceWith(jQuery('<div id="update"> <div class="container"> <table class="table table-bordered"> <tr> <th>Name</th> <td><input type="text" name="fullname" placeholder="<?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname'];  ?>"></td> </tr> <tr> <th>Username</th> <td><?php echo $_SESSION['username'] ?></td> </tr> <tr> <th>Email address</th> <td><?php echo $_SESSION['email'] ?></td> </tr> </table> <button class ="btn btn-submit" id ="edit-btn">Submit</button>  <br> <br> <br> <br> <br> </div> </div> }'));
+         
+
+       
+
+        function myUpdate()
+        {
+        
+        $name = $('#full-name').val();
+
+        <?php
+        require_once('includes/db.php');
+
+    
+        $username = $_SESSION["username"];
+
+        // $sql = "UPDATE users SET firstname='$name' WHERE username='$username'";
+        
+        ?>
+        document.getElementById('submit-btn').style.visibility = 'visible';  
+        $('#update')
+        .html('<div id="profile-table"> <div class="container"> <table class="table table-bordered"> <tr> <th>Name</th> <td><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?></td> </tr> <tr> <th>Username</th> <td><?php echo $_SESSION['username'] ?></td> </tr> <tr> <th>Email address</th> <td><?php echo $_SESSION['email'] ?></td> </tr> </table> <br> <br> <br> <br> <br> </div> </div> }');
+        
+        window.alert($name);
         }
     </script>
 
+    
 
 
     <div id = "profile-table">
@@ -87,12 +113,9 @@ include("includes/navigation-bar.php");
 
     <script src="scripts/jquery-3.2.1.slim.min.js"</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<<<<<<< HEAD
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
-=======
     <script src="scripts/bootstrap.min.js"></script>
->>>>>>> 47d3389f5e849734e0af1a053d24c2335ff78144
 </body>
 
 </html>
