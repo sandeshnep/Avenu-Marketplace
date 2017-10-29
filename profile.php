@@ -68,7 +68,7 @@ include("includes/navigation-bar.php");
         // $sql = "UPDATE users SET firstname='$name' WHERE username='$username'";
         
         ?>
-        document.getElementById('submit-btn').style.visibility = 'visible';  
+        document.getElementById('edit-btn').style.visibility = 'visible';  
         $('#update')
         .html('<div id="profile-table"> <div class="container"> <table class="table table-bordered"> <tr> <th>Name</th> <td><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?></td> </tr> <tr> <th>Username</th> <td><?php echo $_SESSION['username'] ?></td> </tr> <tr> <th>Email address</th> <td><?php echo $_SESSION['email'] ?></td> </tr> </table> <br> <br> <br> <br> <br> </div> </div> }');
         
