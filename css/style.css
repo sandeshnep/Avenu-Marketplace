@@ -10,13 +10,17 @@
 }
 
 body {
-    background-color: #bcdbce;
+    background-color: #F2F8F5;
     color: #2f3030;
     font-family: "Tahoma", Tahoma, sans-serif;
 }
 
 footer {
     background-color: #162820;
+}
+
+table {
+    border: 1px solid black;
 }
 
 a {
