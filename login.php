@@ -1,3 +1,18 @@
+<?php
+//testing cookies!
+/*$cookie_name = "username";
+if(!isset($_COOKIE[$cookie_name])) {
+    echo "Cookie named '" . $cookie_name . "' is not set!";
+} else {
+    echo "Cookie '" . $cookie_name . "' is set!<br>";
+    echo "Value is: " . $_COOKIE[$cookie_name];
+}
+
+*/
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,9 +49,10 @@
             $_SESSION['username'] = $username;
             $_SESSION['loggedin'] = true;
 
-            $cookie_name = "user";
-            $cookie_value = $_SESSION['username'];
-            setcookie($cookie_name, $cookie_value, time()+86400); //expires in one day
+            //setting the relevant cookies
+            setcookie("username", $username, time()+86400, "/");
+            setcookie("password", md5($password), time()+86400, "/");
+
 
             $profile = mysqli_fetch_assoc($result);
             $_SESSION['firstname'] = $profile['firstname'];
