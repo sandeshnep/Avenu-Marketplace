@@ -9,7 +9,9 @@
     3. Save logged in sessions in session storage
     4. Logout and destroy session
     5. Retrieve forgotten password
-
+    6. Persistant login via cookies
+    
+    
 ## Things to work on
 
     1. Sanitize all variables
