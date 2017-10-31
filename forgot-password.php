@@ -1,6 +1,9 @@
 <?php
 require_once('includes/db.php');
 require('includes/php-mailer-autoload.php');
+
+require_once('includes/cookie-check.php');
+check_cookie();
 ?>
 
 <!DOCTYPE html>

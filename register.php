@@ -1,3 +1,8 @@
+<?php
+require_once('includes/cookie-check.php');
+check_cookie();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

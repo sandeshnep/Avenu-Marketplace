@@ -2,41 +2,13 @@
 if(!isset($_SESSION['username'])) {
     session_start();
 }
+
+
+require_once('includes/cookie-check.php');
+check_cookie();
 ?>
 
 
-<?php
-require_once('includes/db.php');
-
-//testing cookies!
-//print cookie status:
-//$cookie_name = "username";
-/*if(!isset($_COOKIE[$cookie_name])) {
-    echo "Cookie named '" . $cookie_name . "' is not set!";
-} else {
-    echo "Cookie '" . $cookie_name . "' is set!<br>";
-    echo "Value is: " . $_COOKIE[$cookie_name];
-}*/
-
-//if the cookie is set, use those values to login!
-if(isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
-//using cookies to set the session variables!
-$username = $_SESSION['username'] = $_COOKIE['username'];
-$password = $_COOKIE['password'];
-$_SESSION['loggedin'] = true;
-
-$query = "SELECT * FROM `users` WHERE username='$username' and password = '$password'";
-
-$result = mysqli_query($connect, $query) or die(mysqli_error());
-    $rows = mysqli_num_rows($result);
-        if ($rows == 1) {
-            $profile = mysqli_fetch_assoc($result);
-            $_SESSION['firstname'] = $profile['firstname'];
-            $_SESSION['lastname'] = $profile['lastname'];
-            $_SESSION['email'] = $profile['email'];}
-
-}
-?>
 
 
 <!DOCTYPE html>
