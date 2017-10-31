@@ -1,5 +1,9 @@
 <?php
+require_once('includes/cookie-check.php');
+check_cookie();
+
 include("includes/auth.php");
+
 ?>
 
 <!DOCTYPE html>
