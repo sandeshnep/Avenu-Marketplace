@@ -109,11 +109,6 @@ include("includes/auth.php");
                 </div>
             </div>
             <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter your email address">
-                <small id="emailHelp" class="form-text text-muted">We won't share your email with anyone.</small>
-            </div>
-            <div class="form-group">
                 <label for="password">New password</label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter desired password">
             </div>
