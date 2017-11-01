@@ -3,13 +3,9 @@ if(!isset($_SESSION['username'])) {
     session_start();
 }
 
-
 require_once('includes/cookie-check.php');
 check_cookie();
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,15 +30,15 @@ check_cookie();
             <?php 
             if(!empty($_SESSION["username"])) {
                 echo '<h1>Welcome Back to Avenu</h1> 
-                <p class="text-lead">Go to your profile to begin!</p>';
+                <p class="text-lead">Go to your <a href="profile.php">profile</a> to begin!</p>';
             }
             ?>
             <?php 
             if(!isset($_SESSION["username"])) {
                 echo '<h1>Welcome to Avenu</h1>
                 <p class="text-lead">Login to begin buying and selling.</p>
-                <a class="btn btn-dark" href="login.php">Login</a>
-                <a class="btn btn-primary" href="register.php">Register</a>';
+                <a class="btn btn-success" href="login.php">Login</a>
+                <a class="btn btn-dark" href="register.php">Register</a>';
             }
             ?>
         </div>

@@ -19,6 +19,7 @@ if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){  //without this,
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/forms.css" />
 </head>
 
 <body>
@@ -48,15 +49,16 @@ if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){  //without this,
             $_SESSION['username'] = $username;
             $_SESSION['loggedin'] = true;
 
-            //setting the relevant cookies
-            setcookie("username", $username, time()+86400, "/");
-            setcookie("password", md5($password), time()+86400, "/");
-
-
             $profile = mysqli_fetch_assoc($result);
             $_SESSION['firstname'] = $profile['firstname'];
             $_SESSION['lastname'] = $profile['lastname'];
             $_SESSION['email'] = $profile['email'];
+
+            if (isset($_POST['remember'])) {
+                //setting the relevant cookies
+                setcookie("username", $username, time()+86400, "/");
+                setcookie("password", md5($password), time()+86400, "/");
+            }
 
             header("Location: index.php");
         } else {
@@ -72,16 +74,20 @@ if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){  //without this,
     <h2>Login to your account</h2>
     <br>
     
-    <form action="" method="post" name="login">
-        <div class="form-group">
-    <label for="username">User Name</label>
-    <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username">
-        </div>
-        <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
-        </div>
-        <button type="submit" name="submit" class="btn btn-success">Login</button>
+    <form class="form" action="" method="post" name="login">
+    <div class="form-group">
+        <label for="username">User Name</label>
+        <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+    </div>
+    <div class="form-group">
+        <input type="checkbox" name="remember" id="remember">
+        <label for="remember">Remember me</label>
+    </div>
+    <button type="submit" name="submit" class="btn btn-success">Login</button>
     </form>
 
     <br>

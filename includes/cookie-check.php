@@ -5,9 +5,10 @@ function check_cookie(){
 
     //if the cookie is set, use those values to login!
     if(isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
-
-     session_start();
-     
+        if(!isset($_SESSION)) {
+            session_start();
+        }
+        
     //using cookies to set the session variables!
     $username = $_SESSION['username'] = $_COOKIE['username'];
     $password = $_COOKIE['password'];

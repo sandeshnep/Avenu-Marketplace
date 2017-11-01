@@ -1,26 +1,12 @@
 .p-tron {
-    background-image: url("simple-pattern-background_1319-147.png");
-    
+    background-image: url("profile-bg.png");
 }
 
-jumbotron {
-    padding: 6rem 2rem;
-}
-
-.hide
-{
+.hide {
     visibility: hidden;
 }
 
 .hero-image {
-    /* The image used */
-   
-   
-
-    /* Set a specific height */
-    
-
-    /* Position and center the image to scale nicely on all screens */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -28,9 +14,6 @@ jumbotron {
     height: 100px;
 }
 
-
-
-/* Place text in the middle of the image */
 .hero-text {
     text-align: center;
     position: absolute;
@@ -46,8 +29,7 @@ jumbotron {
     border-color: #343a40!important;
 }
 
-.btn-submit 
-{
+.btn-submit {
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
