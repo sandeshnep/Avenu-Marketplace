@@ -59,18 +59,35 @@ include("includes/auth.php");
         // If form submitted, insert values into the database.
         if (isset($_POST['submit'])) {
             $username = $_SESSION['username'];
-            
-            $firstname = stripslashes($_POST['firstname']);
-            $lastname = stripslashes($_POST['lastname']);
-            $password = stripslashes(md5($_POST['password']));
-            $oldpassword = stripslashes(md5($_POST['oldpassword']));
 
             $query = "SELECT * FROM `users` WHERE username='$username'";
             $result = mysqli_query($connect, $query) or die(mysqli_error());
             $profile = mysqli_fetch_assoc($result);
             $passwordcheck = $profile['password'];
 
-            if ($oldpassword == $passwordcheck) {
+            $passwordconfirm = stripslashes(md5($_POST['oldpassword']));
+
+            if ($passwordconfirm == $passwordcheck) {
+
+                if(empty($_POST['firstname'])){
+                    $firstname = $profile['firstname'];
+                }
+                else{
+                    $firstname = stripslashes($_POST['firstname']);
+                }
+                if(empty($_POST['lastname'])){
+                    $lastname = $profile['lastname'];
+                }
+                else{
+                    $lastname = stripslashes($_POST['lastname']);
+                }
+                if(empty($_POST['password'])){
+                    $password = $profile['password'];
+                }
+                else{
+                    $password = stripslashes(md5($_POST['password']));
+                    $oldpassword = stripslashes(md5($_POST['oldpassword']));
+                }
                 
                 $update = "UPDATE users 
                 SET
