@@ -14,6 +14,7 @@ include("includes/auth.php");
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/profile.css" />
     <link rel="stylesheet" href="css/forms.css" />
 </head>
 
@@ -61,31 +62,50 @@ include("includes/auth.php");
             
             $firstname = stripslashes($_POST['firstname']);
             $lastname = stripslashes($_POST['lastname']);
-            $email = stripslashes($_POST['email']);
             $password = stripslashes(md5($_POST['password']));
+            $oldpassword = stripslashes(md5($_POST['oldpassword']));
 
-            $query = "UPDATE users 
-            SET
-            firstname = '$firstname', 
-            lastname = '$lastname', 
-            password = '$password'
-            WHERE username = '$username'
-            ";
-            
-            $result = mysqli_query($connect, $query);
-            if (mysqli_query($connect, $query)) {
-                echo '<div class="alert alert-success">
-                <h3>Profile updated successfully.</h3>
-                </div>';
-                $_SESSION['firstname'] = $firstname;
-                $_SESSION['lastname'] = $lastname;
-                $_SESSION['email'] = $email;
-                header("Location: profile.php");
+            $query = "SELECT * FROM `users` WHERE username='$username'";
+            $result = mysqli_query($connect, $query) or die(mysqli_error());
+            $profile = mysqli_fetch_assoc($result);
+            $passwordcheck = $profile['password'];
+
+            if ($oldpassword == $passwordcheck) {
+                
+                $update = "UPDATE users 
+                SET
+                firstname = '$firstname', 
+                lastname = '$lastname', 
+                password = '$password'
+                WHERE username = '$username'
+                ";
+
+                $result2 = mysqli_query($connect, $update);
+                if (mysqli_query($connect, $update)) {
+                    $_SESSION['firstname'] = $firstname;
+                    $_SESSION['lastname'] = $lastname;
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3>Profile updated successfully.</h3>
+                    </div>';
+                    header("Refresh:1");
+                    // header("Location: profile.php");
+                } else {
+                    echo '<div class="alert alert-danger">
+                    <h3>Error updating profile.</h3>
+                    <div>Error: ' . mysqli_error($connect); 
+                    echo '</div></div>';
+                }
             } else {
-                echo '<div class="alert alert-success">
-                <h3>Error updating profile.</h3>
-                <div>Error: ' . mysqli_error($connect); 
-                echo '</div></div>';
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h3>Incorrect Password.</h3>
+                <div>Please verify changes with your current password</div>
+                </div>';
             }
         }
         ?>
@@ -112,6 +132,12 @@ include("includes/auth.php");
                 <label for="password">New password</label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter desired password">
             </div>
+            <br>
+            <div class="form-group">
+                <h4>Verify changes with current password</h4>
+                <label for="oldpassword">Current password</label>
+                <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Enter current password">
+            </div>
             <button type="submit" name="submit" class="btn btn-success">Submit</button>
         </form>
 
@@ -126,6 +152,5 @@ include("includes/auth.php");
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
     <script src="scripts/bootstrap.min.js"></script>
-
 </body>
 </html>
