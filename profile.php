@@ -3,38 +3,42 @@ require_once('includes/cookie-check.php');
 check_cookie();
 
 include("includes/auth.php");
-require('includes/db.php');
 
-// If form submitted, insert values into the database.
-if (isset($_POST['submit'])) {
-    $username = $_SESSION['username'];
+        require('includes/db.php');
+        // If form submitted, insert values into the database.
+        if (isset($_POST['submit'])) {
+            $username = $_SESSION['username'];
 
-    $query = "SELECT * FROM `users` WHERE username='$username'";
-    $result = mysqli_query($connect, $query) or die(mysqli_error());
-    $profile = mysqli_fetch_assoc($result);
-    $passwordcheck = $profile['password'];
+            $query = "SELECT * FROM `users` WHERE username='$username'";
+            $result = mysqli_query($connect, $query) or die(mysqli_error());
+            $profile = mysqli_fetch_assoc($result);
+            $passwordcheck = $profile['password'];
 
-    $passwordconfirm = stripslashes(md5($_POST['oldpassword']));
+            $passwordconfirm = stripslashes(md5($_POST['oldpassword']));
 
-    if ($passwordconfirm == $passwordcheck) {
-        if (empty($_POST['firstname'])) {
-            $firstname = $profile['firstname'];
-        } else {
-            $firstname = stripslashes($_POST['firstname']);
-        }
-        if (empty($_POST['lastname'])) {
-            $lastname = $profile['lastname'];
-        } else {
-            $lastname = stripslashes($_POST['lastname']);
-        }
-        if (empty($_POST['password'])) {
-            $password = $profile['password'];
-        } else {
-            $password = stripslashes(md5($_POST['password']));
-            $oldpassword = stripslashes(md5($_POST['oldpassword']));
-        }
+            if ($passwordconfirm == $passwordcheck) {
+
+                if(empty($_POST['firstname'])){
+                    $firstname = $profile['firstname'];
+                }
+                else{
+                    $firstname = stripslashes($_POST['firstname']);
+                }
+                if(empty($_POST['lastname'])){
+                    $lastname = $profile['lastname'];
+                }
+                else{
+                    $lastname = stripslashes($_POST['lastname']);
+                }
+                if(empty($_POST['password'])){
+                    $password = $profile['password'];
+                }
+                else{
+                    $password = stripslashes(md5($_POST['password']));
+                    $oldpassword = stripslashes(md5($_POST['oldpassword']));
+                }
                 
-        $update = "UPDATE users 
+                $update = "UPDATE users 
                 SET
                 firstname = '$firstname', 
                 lastname = '$lastname', 
@@ -42,36 +46,35 @@ if (isset($_POST['submit'])) {
                 WHERE username = '$username'
                 ";
 
-        $result2 = mysqli_query($connect, $update);
-        if (mysqli_query($connect, $update)) {
-            $_SESSION['firstname'] = $firstname;
-            $_SESSION['lastname'] = $lastname;
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                $result2 = mysqli_query($connect, $update);
+                if (mysqli_query($connect, $update)) {
+                    $_SESSION['firstname'] = $firstname;
+                    $_SESSION['lastname'] = $lastname;
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                     <h3>Profile updated successfully.</h3>
                     </div>';
-            // header("Refresh:1");
-            // header("Location: profile.php");
-        } else {
-            echo '<div class="alert alert-danger">
+                    // header("Refresh:1");
+                    // header("Location: profile.php");
+                } else {
+                    echo '<div class="alert alert-danger">
                     <h3>Error updating profile.</h3>
-                    <div>Error: ' . mysqli_error($connect);
-            echo '</div></div>';
-        }
-    } else {
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div>Error: ' . mysqli_error($connect); 
+                    echo '</div></div>';
+                }
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
                 <h3>Incorrect Password.</h3>
                 <div>Please verify changes with your current password</div>
                 </div>';
-    }
-}
-       
-?>
+            }
+        }
+        ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,29 +87,10 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/profile.css" />
     <link rel="stylesheet" href="css/forms.css" />
-    <script type="text/javascript">
-        var firstname = "<?php echo $_SESSION['firstname'] ?>";
-        var lastname = "<?php echo $_SESSION['lastname'] ?>";
-
-        function printName(firstname) {
-            if (firstname == !null) { 
-                document.getElementById("firstname").innerHTML = "";
-                return;
-            } else {
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("firstname").innerHTML = this.responseText;
-                    }
-                };
-                xmlhttp.open("GET", "profile.php?q=" + firstname, true);
-                xmlhttp.send();
-            }
-        }
-    </script>
 </head>
 
 <body>
+
    
     <?php
     include("includes/navigation-bar.php");
@@ -176,10 +160,8 @@ if (isset($_POST['submit'])) {
 
     <br>
 
-    <?php include("includes/footer.php"); ?>
-
-    <script src="scripts/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="scripts/bootstrap.min.js"></script>
+    <?php
+    include("includes/footer.php");
+    ?>
 </body>
 </html>
