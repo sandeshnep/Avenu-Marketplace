@@ -1,0 +1,34 @@
+210 Marketplace schema:
+Variables:
+
+-USERID : Buyer / Seller
+
+-BUYER :
+	User Attributes: Full Name, Email, UserID, Password, Phone No., Profile Picture
+
+-SELLER :
+	Seller Attributes: Profile Picture, Seller Rating
+	Product Attributes: ID, Name, Description, Date Posted, Ratings, Comments
+
+-------------------------------------------------------------------------------------------
+
+Sample SQL Commands:
+
+1) Fetching the products sold by username = 'sandeshnep' (gets entire row)
+	SELECT * FROM products WHERE username = 'sandeshnep'
+
+2) Add /Update a product
+	INSERT INTO products VALUES (productid, 'sandeshnep', 'Tomato Juice', 'juicy', date)
+
+3) Delete a product
+	DELETE FROM `products` WHERE productid=3
+
+
+4) Add /Update ratings for a product
+	UPDATE `reviews` SET `rating`=4,`comments`='updated comment' WHERE productid=5 AND authorid='zubair'
+
+5) Write reviews for a product
+	INSERT INTO `reviews`(`username`, `productid`, `rating`, `comments`, `authorid`) VALUES ('sandeshnep',1,5,'very very gord','zubair')
+
+6) Delete reviews for a product
+	DELETE FROM `reviews` WHERE productid=1 AND authorid='sandeshnep'

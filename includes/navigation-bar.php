@@ -22,9 +22,15 @@
                 </li>';
             }
             ?>
+
+
             <?php 
             if(isset($_SESSION["username"])) {
                 ?>
+                <li class="nav-item">
+                <a class="nav-link" href="marketplace.php">Common Marketplace</a>
+                <li class="nav-item">
+                <a class="nav-link" href="myproducts.php">My Marketplace</a>
                 <li class="nav-item">
                 <a class="nav-link" href="profile.php"><?php echo $_SESSION['firstname'] ?></a>
                 </li>
