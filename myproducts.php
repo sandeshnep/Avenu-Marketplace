@@ -1,26 +1,14 @@
 <?php
-require_once('includes/cookie-check.php');
+if (!isset($_SESSION)) {
+    session_start();
+}
+$pagename = "MY MARKETPLACE";
+require_once('includes/functions.php');
 check_cookie();
+authenticate();
 
-include("includes/auth.php");
+require_once('includes/header.php');
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title><?php echo $_SESSION['firstname'] ."'s Marketplace" . '</span>' ?></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css" />
-</head>
-
-<body>
-    
-    <?php
-    include("includes/navigation-bar.php");
-    ?>
 
     <div class="jumbotron rounded-0">
         <h2><?php echo $_SESSION['firstname'] ."'s Marketplace" . '</span>' ?></h2>
@@ -61,7 +49,7 @@ include("includes/auth.php");
 
        	    echo'<ul>';
        	    
-       	    while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
+       	    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
                 if(isset($_POST['delete']) and is_numeric($_POST['delete'])){
 
@@ -112,8 +100,6 @@ include("includes/auth.php");
 
     </div>
 
-    <script src="scripts/jquery-3.2.1.slim.min.js"</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="scripts/bootstrap.min.js"></script>
-</body>
-</html>
+<?php
+    require_once('includes/header.php');
+?>

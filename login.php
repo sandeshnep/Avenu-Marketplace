@@ -1,40 +1,17 @@
 <?php
-
-//redirects from login to index.php if cookie is valid
-if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){  //without this, there will me a sql conflict
-    include('includes/cookie-check.php');
-    check_cookie();
-    redirect();
-}
-
+$pagename = "LOGIN";
+require_once('includes/functions.php');
+check_cookie();
+redirect();
+require_once('includes/header.php');
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/forms.css" />
-</head>
-
-<body>
-
-    
-    <?php
-    include("includes/navigation-bar.php");
-    ?>
 
     <div class="container">
     <br>
 
     <?php
         require_once('includes/db.php');
-        if(!isset($_SESSION['username'])) {
+        if(!isset($_SESSION)) {
             session_start();
         }
         // If form submitted, insert values into the database.
@@ -50,6 +27,7 @@ if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){  //without this,
             $_SESSION['loggedin'] = true;
 
             $profile = mysqli_fetch_assoc($result);
+            $_SESSION['id'] = $profile['id'];
             $_SESSION['firstname'] = $profile['firstname'];
             $_SESSION['lastname'] = $profile['lastname'];
             $_SESSION['email'] = $profile['email'];
@@ -87,7 +65,7 @@ if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){  //without this,
         <input type="checkbox" name="remember" id="remember">
         <label for="remember">Remember me</label>
     </div>
-    <button type="submit" name="submit" class="btn btn-success">Login</button>
+    <button type="submit" name="submit" class="btn btn-info">Login</button>
     </form>
 
     <br>
@@ -105,11 +83,6 @@ if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){  //without this,
 
     <?php } ?>
 
-    <?php include("includes/footer.php"); ?>
-
-    <script src="scripts/jquery-3.2.1.slim.min.js"</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="scripts/bootstrap.min.js"></script>
-    
-</body>
-</html>
+<?php
+require_once("includes/footer.php");
+?>

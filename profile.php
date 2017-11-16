@@ -1,8 +1,9 @@
 <?php
-require_once('includes/cookie-check.php');
+$pagename = "PROFILE";
+require_once('includes/functions.php');
 check_cookie();
 
-include("includes/auth.php");
+authenticate();
 
         require('includes/db.php');
         // If form submitted, insert values into the database.
@@ -74,27 +75,10 @@ include("includes/auth.php");
                 </div>';
             }
         }
-        ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/profile.css" />
-    <link rel="stylesheet" href="css/forms.css" />
-</head>
-
-<body>
-
-   
-    <?php
-    include("includes/navigation-bar.php");
-    ?>
+        
+require_once('includes/header.php');
+?>
 
     <div class="jumbotron rounded-0 p-tron">
         <div class="container">
@@ -102,9 +86,9 @@ include("includes/auth.php");
         </div>
     </div> 
 
-    <div class="container">
+    <div class='container'>
 
-        <table class="table table-bordered">
+        <table class='table table-bordered'>
             <tr>
                 <th>Name</th>
                 <td><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?></td>
@@ -160,8 +144,6 @@ include("includes/auth.php");
 
     <br>
 
-    <?php
-    include("includes/footer.php");
-    ?>
-</body>
-</html>
+<?php
+include("includes/footer.php");
+?>
