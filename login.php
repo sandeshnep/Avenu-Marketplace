@@ -2,7 +2,7 @@
 
 //redirects from login to index.php if cookie is valid
 if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){  //without this, there will me a sql conflict
-    require_once('includes/cookie-check.php');
+    include('includes/cookie-check.php');
     check_cookie();
     redirect();
 }
