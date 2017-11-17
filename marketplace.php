@@ -6,26 +6,9 @@ $pagename = "MARKETPLACE";
 require_once('includes/functions.php');
 check_cookie();
 authenticate();
+require_once('includes/header.php');
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css" />
-</head>
-
-<body>
-
-    
-    <?php
-    include("includes/navigation-bar.php");
-    ?>
 
     <div class="jumbotron rounded-0">
         <h2>Common Marketplace</h2>

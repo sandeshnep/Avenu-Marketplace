@@ -102,3 +102,7 @@ function redirect() {
         header( 'Location: index.php' ) ;
     }
 }
+
+function refresh() {
+    header("Refresh:0");
+}

@@ -28,9 +28,10 @@ require_once('includes/header.php');
 			$username = $_SESSION['username'];
 			$prodname = stripslashes($_POST['productname']);
 			$description = stripslashes($_POST['description']);
+            $date = getdate();
 
             //SQL command to add a product on to the database
-			$query = "INSERT INTO products VALUES (productid, '$username', '$prodname', '$description', date)";
+			$query = "INSERT INTO products VALUES (productid, '$username', '$prodname', '$description', $date";
 
 			$result = mysqli_query($connect, $query);
 
@@ -64,7 +65,8 @@ require_once('includes/header.php');
 
                 }
 
-       	    	echo '<li> <b>productid : </b> ' . $row['productid'] . '<br><b>product name: </b>' . $row['name']  . '<br><b>product description: </b>' . $row['description']  . '<br><b>by user: </b>' . $row['username'] . '<br><b>date posted: </b>' . $row['date'] . '
+       	    	echo '<li> <b>Productid : </b> ' . $row['productid'] . '<br><b>Product name: </b>' . $row['name']  . 
+                '<br><b>Product Description: </b>' . $row['description']  . '<br><b>Date Posted: </b>' . $row['date'] . '
                 </li>
                 <form name = "delete" method = "POST">
                 <button type="submit" name="delete" value = "' . $row['productid'].'" class="btn btn-success">Delete</button>
