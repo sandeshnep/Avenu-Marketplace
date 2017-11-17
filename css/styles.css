@@ -37,6 +37,9 @@ a:hover {
     border-collapse: collapse;
 }
 
+ul{ 
+    list-style-type: none; 
+}
 
 /* .erase {
     float: right;
