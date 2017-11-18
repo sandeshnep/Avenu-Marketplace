@@ -17,3 +17,9 @@
     1. Sanitize all variables
     2. Clean up code
     3. Set custom stylings
+
+
+## File Name
+iform.php - Holds Ajax Updated Item Form
+pform.php - Holds Ajax Updated Profiel Form
+

@@ -1,29 +1,22 @@
 <?php
-if (!isset($_SESSION)) {
+if(!isset($_SESSION['username'])) {
     session_start();
 }
-$pagename = "MY MARKETPLACE";
+
 require_once('includes/functions.php');
 check_cookie();
-authenticate();
+authenticate(); ?>
 
-require_once('includes/header.php');
 
-?>
-     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<div class="container">
 
-    <div class="jumbotron rounded-0">
-        <h2><?php echo $_SESSION['firstname'] ."'s Marketplace" . '</span>' ?></h2>
-        <p class="lead">Add, Update or Remove Products!</p>  
-    </div>
-
-    <br>
-
-    <div class="container">
-    
 
     	<?php
-    	require('includes/db.php');
+        require('includes/db.php');
+        
+        if(!empty($_POST))
+        {
+            
 
 		//add products, if the add product form is submitted
 		if (isset($_POST['productname']) && isset($_POST['description'])) {
@@ -36,8 +29,8 @@ require_once('includes/header.php');
             //SQL command to add a product on to the database
 			$query = "INSERT INTO products VALUES (productid, '$username', '$prodname', '$description', CURRENT_TIMESTAMP)";
 
-			$result = mysqli_query($connect, $query);
-
+            $result = mysqli_query($connect, $query);
+           
 		} ?>
 
 
@@ -51,7 +44,7 @@ require_once('includes/header.php');
             $result = mysqli_query($connect, $query) or die(mysqli_error());
        	    $rows = mysqli_num_rows($result);
 
-       	    echo'<ul>';
+       	    echo'<div id="product-list"> <ul id="item-list">';
        	    
        	    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
@@ -66,43 +59,48 @@ require_once('includes/header.php');
                 refresh();
         
 
-                }
+                } ?>
 
-       	    	echo '<li> <b>Productid : </b> ' . $row['productid'] . '<br><b>Product name: </b>' . $row['name']  . 
-                '<br><b>Product Description: </b>' . $row['description']  . '<br><b>Date Posted: </b>' .$row['timesql'] . '
+       	    	<li> <b>Productid : </b><?php echo $row['productid'] ?><br>
+                     <b>Product name: </b><?php echo $row['name']  ?><br>
+                     <b>Product Description:</b><?php echo $row['description'] ?><br>
+                     <b>Date Posted: </b><?php echo $row['timesql'] ?>
                 </li>
                 <form name = "delete" method = "POST">
                 <button type="submit" name="delete" value = "' . $row['productid'].'" class="btn btn-success">Delete</button>
-                </form><hr>';
-       	    }
+                </form>
+                <br>
+       	   <?php }
 
-           echo '</ul>';
+           echo '</ul></div>';
         }
-        ?>
+    }
+        
+    ?>
 
-        <h1> Add Products: </h1>
+    <h1> Add Products: </h1>
 
-        <form  id="add-item-form">
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="productname">Product Name</label>
-                        <input type="text" class="form-control" name="productname" id="productname" placeholder="Enter Product Name">
+            <form  id="add-item-form">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="productname">Product Name</label>
+                            <input type="text" class="form-control" name="productname" id="productname" placeholder="Enter Product Name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="description">Product Description</label>
+                            <input type="text" class="form-control" name="description" id="description" placeholder="Enter product description">
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="description">Product Description</label>
-                        <input type="text" class="form-control" name="description" id="description" placeholder="Enter product description">
-                    </div>
-                </div>
-            </div>
-            
-            <button type="submit" id="insert" name="submit" class="btn btn-success">Add Product</button>
-        </form>
-    </div>
+                
+                <button type="submit" id="insert" name="submit" class="btn btn-success">Add Product</button>
+            </form>
+        </div>
 
-    <script>
+        <script>
             $(document).ready(function () {
                 $('#add-item-form').on("submit", function(event) {
                     event.preventDefault();
@@ -118,7 +116,7 @@ require_once('includes/header.php');
                             $('#insert').val("Insert");
                             $('#add-item-form')[0].reset(); 
                             $('.container').html(data); 
-                           
+                            
                            
                        }
                    })
@@ -127,9 +125,5 @@ require_once('includes/header.php');
 
             
         </script>
-
-
-
-<?php
-    require_once('includes/header.php');
-?>
+    
+</div>
