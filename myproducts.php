@@ -28,10 +28,10 @@ require_once('includes/header.php');
 			$username = $_SESSION['username'];
 			$prodname = stripslashes($_POST['productname']);
 			$description = stripslashes($_POST['description']);
-            $date = getdate();
 
+           
             //SQL command to add a product on to the database
-			$query = "INSERT INTO products VALUES (productid, '$username', '$prodname', '$description', $date";
+            $query = "INSERT INTO products VALUES (productid, '$username', '$prodname', '$description', CURRENT_TIMESTAMP)";
 
 			$result = mysqli_query($connect, $query);
 
