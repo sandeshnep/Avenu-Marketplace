@@ -1,17 +1,6 @@
 210 Marketplace schema:
 Variables:
 
--USERID : Buyer / Seller
-
--BUYER :
-	User Attributes: Full Name, Email, UserID, Password, Phone No., Profile Picture
-
--SELLER :
-	Seller Attributes: Profile Picture, Seller Rating
-	Product Attributes: ID, Name, Description, Date Posted, Ratings, Comments
-
--------------------------------------------------------------------------------------------
-
 Sample SQL Commands:
 
 1) Fetching the products sold by username = 'sandeshnep' (gets entire row)

@@ -3,3 +3,7 @@ form {
     padding: 1em;
     border-radius: 1em;
 }
+
+label {
+    padding-left: 0.25em;
+}

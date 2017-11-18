@@ -1,26 +1,14 @@
 <?php
-require_once('includes/cookie-check.php');
+if (!isset($_SESSION)) {
+    session_start();
+}
+$pagename = "MY MARKETPLACE";
+require_once('includes/functions.php');
 check_cookie();
+authenticate();
 
-include("includes/auth.php");
+require_once('includes/header.php');
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title><?php echo $_SESSION['firstname'] ."'s Marketplace" . '</span>' ?></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css" />
-</head>
-
-<body>
-    
-    <?php
-    include("includes/navigation-bar.php");
-    ?>
 
     <div class="jumbotron rounded-0">
         <h2><?php echo $_SESSION['firstname'] ."'s Marketplace" . '</span>' ?></h2>
@@ -40,9 +28,10 @@ include("includes/auth.php");
 			$username = $_SESSION['username'];
 			$prodname = stripslashes($_POST['productname']);
 			$description = stripslashes($_POST['description']);
+            $date = getdate();
 
             //SQL command to add a product on to the database
-			$query = "INSERT INTO products VALUES (productid, '$username', '$prodname', '$description', date)";
+			$query = "INSERT INTO products VALUES (productid, '$username', '$prodname', '$description', $date";
 
 			$result = mysqli_query($connect, $query);
 
@@ -76,7 +65,8 @@ include("includes/auth.php");
 
                 }
 
-       	    	echo '<li> <b>productid : </b> ' . $row['productid'] . '<br><b>product name: </b>' . $row['name']  . '<br><b>product description: </b>' . $row['description']  . '<br><b>by user: </b>' . $row['username'] . '<br><b>date posted: </b>' . $row['date'] . '
+       	    	echo '<li> <b>Productid : </b> ' . $row['productid'] . '<br><b>Product name: </b>' . $row['name']  . 
+                '<br><b>Product Description: </b>' . $row['description']  . '<br><b>Date Posted: </b>' . $row['date'] . '
                 </li>
                 <form name = "delete" method = "POST">
                 <button type="submit" name="delete" value = "' . $row['productid'].'" class="btn btn-success">Delete</button>
@@ -112,8 +102,6 @@ include("includes/auth.php");
 
     </div>
 
-    <script src="scripts/jquery-3.2.1.slim.min.js"</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="scripts/bootstrap.min.js"></script>
-</body>
-</html>
+<?php
+    require_once('includes/header.php');
+?>

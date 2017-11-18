@@ -1,25 +1,12 @@
 <?php
-require_once('includes/cookie-check.php');
+$pagename = "REGISTER";
+require_once('includes/functions.php');
 check_cookie();
+redirect();
+
+require_once('includes/header.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/forms.css" />
-</head>
-
-<body>
-    
-    <?php
-    include("includes/navigation-bar.php");
-    ?>
     <div class="container">
 
         <br>
@@ -100,17 +87,16 @@ check_cookie();
 
     <br>
 
-    <?php include("includes/footer.php"); ?>
 
-    <script src="scripts/jquery-3.2.1.slim.min.js"</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="scripts/bootstrap.min.js"></script>
+    <?php
+    require_once("includes/footer.php");
+    ?>
     <script>
         $(document).ready(function () {
             $('#usernameLoading').hide();
             $('#username').keyup(function () {
                 $('#usernameLoading').show();
-                $.post("includes/check.php", {
+                $.post("includes/username-check.php", {
                     username: $('#username').val()
                 }, function (response) {
                     $('#usernameResult').fadeOut();
@@ -127,5 +113,4 @@ check_cookie();
         } //finishAjax
     </script>
 <?php } ?>
-</body>
-</html>
+
