@@ -61,7 +61,7 @@ include("includes/auth.php");
 
        	    echo'<ul>';
        	    
-       	    while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
+       	    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
                 if(isset($_POST['delete']) and is_numeric($_POST['delete'])){
 

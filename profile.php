@@ -5,76 +5,8 @@ check_cookie();
 include("includes/auth.php");
 
         require('includes/db.php');
-        // If form submitted, insert values into the database.
-        if (isset($_POST['submit'])) {
-            $username = $_SESSION['username'];
+?>
 
-            $query = "SELECT * FROM `users` WHERE username='$username'";
-            $result = mysqli_query($connect, $query) or die(mysqli_error());
-            $profile = mysqli_fetch_assoc($result);
-            $passwordcheck = $profile['password'];
-
-            $passwordconfirm = stripslashes(md5($_POST['oldpassword']));
-
-            if ($passwordconfirm == $passwordcheck) {
-
-                if(empty($_POST['firstname'])){
-                    $firstname = $profile['firstname'];
-                }
-                else{
-                    $firstname = stripslashes($_POST['firstname']);
-                }
-                if(empty($_POST['lastname'])){
-                    $lastname = $profile['lastname'];
-                }
-                else{
-                    $lastname = stripslashes($_POST['lastname']);
-                }
-                if(empty($_POST['password'])){
-                    $password = $profile['password'];
-                }
-                else{
-                    $password = stripslashes(md5($_POST['password']));
-                    $oldpassword = stripslashes(md5($_POST['oldpassword']));
-                }
-                
-                $update = "UPDATE users 
-                SET
-                firstname = '$firstname', 
-                lastname = '$lastname', 
-                password = '$password'
-                WHERE username = '$username'
-                ";
-
-                $result2 = mysqli_query($connect, $update);
-                if (mysqli_query($connect, $update)) {
-                    $_SESSION['firstname'] = $firstname;
-                    $_SESSION['lastname'] = $lastname;
-                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h3>Profile updated successfully.</h3>
-                    </div>';
-                    // header("Refresh:1");
-                    // header("Location: profile.php");
-                } else {
-                    echo '<div class="alert alert-danger">
-                    <h3>Error updating profile.</h3>
-                    <div>Error: ' . mysqli_error($connect); 
-                    echo '</div></div>';
-                }
-            } else {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                <h3>Incorrect Password.</h3>
-                <div>Please verify changes with your current password</div>
-                </div>';
-            }
-        }
-        ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,6 +15,7 @@ include("includes/auth.php");
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/profile.css" />
@@ -104,7 +37,7 @@ include("includes/auth.php");
 
     <div class="container">
 
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="profile_table">
             <tr>
                 <th>Name</th>
                 <td><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?></td>
@@ -128,7 +61,7 @@ include("includes/auth.php");
         <h3>Update account Information</h3>
         <br>
 
-        <form action="" method="POST">
+        <form  id="update_form">
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -137,7 +70,7 @@ include("includes/auth.php");
                     </div>
                 </div>
                 <div class="col">
-                    <div class="form-group" method="POST">
+                    <div class="form-group" method="">
                         <label for="lastname">Last Name</label>
                         <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter your last name">
                     </div>
@@ -153,7 +86,7 @@ include("includes/auth.php");
                 <label for="oldpassword">Current password</label>
                 <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Enter current password">
             </div>
-            <button type="submit" name="submit" class="btn btn-success">Submit</button>
+            <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
         </form>
 
     </div>
@@ -163,5 +96,29 @@ include("includes/auth.php");
     <?php
     include("includes/footer.php");
     ?>
+
+    <script>
+            $(document).ready(function () {
+                $('#update_form').on("submit", function(event) {
+                    event.preventDefault();
+                    
+                   $.ajax({
+                       url: "pform.php",
+                       method: "POST",
+                       data:$('#update_form').serialize(),
+                       beforeSend:function() { $('#insert').val("Updating...");},
+                       success:function(data)
+                       {
+                            $('#insert').val("Insert");
+                            $('#update_form')[0].reset(); 
+                            $('#profile_table').html(data); 
+                           
+                       }
+                   })
+                });
+            });
+
+            
+        </script>
 </body>
 </html>
