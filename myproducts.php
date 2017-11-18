@@ -66,7 +66,7 @@ require_once('includes/header.php');
                 }
 
        	    	echo '<li> <b>Productid : </b> ' . $row['productid'] . '<br><b>Product name: </b>' . $row['name']  . 
-                '<br><b>Product Description: </b>' . $row['description']  . '<br><b>Date Posted: </b>' . $row['date'] . '
+                '<br><b>Product Description: </b>' . $row['description']  . '<br><b>Date Posted: </b>' . $row['timesql'] . '
                 </li>
                 <form name = "delete" method = "POST">
                 <button type="submit" name="delete" value = "' . $row['productid'].'" class="btn btn-success">Delete</button>
