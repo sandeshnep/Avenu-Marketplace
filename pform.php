@@ -4,9 +4,9 @@ if(!isset($_SESSION['username'])) {
     session_start();
 }
 
-require_once('includes/cookie-check.php');
+require_once('includes/functions.php');
 check_cookie();
-include("includes/auth.php");
+authenticate();
 
 
         require('includes/db.php');
@@ -103,20 +103,7 @@ include("includes/auth.php");
 
                         ?>
 
-                        <table class="table table-bordered" id="profile_table">
-                        <tr>
-                            <th>Name</th>
-                            <td><?php echo $firstname . " " . $lastname ?></td>
-                        </tr>
-                        <tr>
-                            <th>Username</th>
-                            <td><?php echo $_SESSION["username"] ?></td>
-                        </tr>
-                        <tr>
-                            <th>Email address</th>
-                            <td><?php echo $_SESSION["email"] ?></td>
-                        </tr>
-                        </table>        
+                       
 
                         <?php
                        

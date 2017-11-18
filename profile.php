@@ -5,8 +5,7 @@ check_cookie();
 
 authenticate();
 
-        require('includes/db.php');
-<<<<<<< HEAD
+require('includes/db.php');
 ?>
 
 
@@ -29,82 +28,8 @@ authenticate();
    
     <?php
     include("includes/navigation-bar.php");
+    require_once('includes/header.php');
     ?>
-=======
-        // If form submitted, insert values into the database.
-        if (isset($_POST['submit'])) {
-            $username = $_SESSION['username'];
-
-            $query = "SELECT * FROM `users` WHERE username='$username'";
-            $result = mysqli_query($connect, $query) or die(mysqli_error());
-            $profile = mysqli_fetch_assoc($result);
-            $passwordcheck = $profile['password'];
-
-            $passwordconfirm = stripslashes(md5($_POST['oldpassword']));
-
-            if ($passwordconfirm == $passwordcheck) {
-
-                if(empty($_POST['firstname'])){
-                    $firstname = $profile['firstname'];
-                }
-                else{
-                    $firstname = stripslashes($_POST['firstname']);
-                }
-                if(empty($_POST['lastname'])){
-                    $lastname = $profile['lastname'];
-                }
-                else{
-                    $lastname = stripslashes($_POST['lastname']);
-                }
-                if(empty($_POST['password'])){
-                    $password = $profile['password'];
-                }
-                else{
-                    $password = stripslashes(md5($_POST['password']));
-                    $oldpassword = stripslashes(md5($_POST['oldpassword']));
-                }
-                
-                $update = "UPDATE users 
-                SET
-                firstname = '$firstname', 
-                lastname = '$lastname', 
-                password = '$password'
-                WHERE username = '$username'
-                ";
-
-                $result2 = mysqli_query($connect, $update);
-                if (mysqli_query($connect, $update)) {
-                    $_SESSION['firstname'] = $firstname;
-                    $_SESSION['lastname'] = $lastname;
-                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h3>Profile updated successfully.</h3>
-                    </div>';
-                    // header("Refresh:1");
-                    // header("Location: profile.php");
-                } else {
-                    echo '<div class="alert alert-danger">
-                    <h3>Error updating profile.</h3>
-                    <div>Error: ' . mysqli_error($connect); 
-                    echo '</div></div>';
-                }
-            } else {
-                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                <h3>Incorrect Password.</h3>
-                <div>Please verify changes with your current password</div>
-                </div>';
-            }
-        }
-
-        
-require_once('includes/header.php');
-?>
->>>>>>> ece5471f2fa9667a1c66205736db519f1a3695d1
 
     <div class="jumbotron rounded-0 p-tron">
         <div class="container">
@@ -114,11 +39,7 @@ require_once('includes/header.php');
 
     <div class='container'>
 
-<<<<<<< HEAD
         <table class="table table-bordered" id="profile_table">
-=======
-        <table class='table table-bordered'>
->>>>>>> ece5471f2fa9667a1c66205736db519f1a3695d1
             <tr>
                 <th>Name</th>
                 <td><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?></td>
@@ -174,7 +95,6 @@ require_once('includes/header.php');
 
     <br>
 
-<<<<<<< HEAD
     <?php
     include("includes/footer.php");
     ?>
@@ -204,8 +124,4 @@ require_once('includes/header.php');
         </script>
 </body>
 </html>
-=======
-<?php
-include("includes/footer.php");
-?>
->>>>>>> ece5471f2fa9667a1c66205736db519f1a3695d1
+
