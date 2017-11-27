@@ -10,20 +10,22 @@ authenticate();
 require_once('includes/header.php');
 
 ?>
-     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
     <div class="jumbotron rounded-0">
-        <h2><?php echo $_SESSION['firstname'] ."'s Marketplace" . '</span>' ?></h2>
-        <p class="lead">Add, Update or Remove Products!</p>  
+        <h2>
+            <?php echo $_SESSION['firstname'] ."'s Marketplace" . '</span>' ?>
+        </h2>
+        <p class="lead">Add, Update or Remove Products!</p>
     </div>
 
     <br>
 
     <div class="container">
-    
 
-    	<?php
-    	require('includes/db.php');
+
+        <?php
+    	require_once('includes/db.php');
 
 		//add products, if the add product form is submitted
 		if (isset($_POST['productname']) && isset($_POST['description'])) {
@@ -41,9 +43,9 @@ require_once('includes/header.php');
 		} ?>
 
 
-        <h1> Your Products: </h1>
+            <h1> Your Products: </h1>
 
-        <?php 
+            <?php 
         if(isset($_SESSION['username'])){
         	$username = $_SESSION['username'];
 
@@ -80,56 +82,53 @@ require_once('includes/header.php');
         }
         ?>
 
-        <h1> Add Products: </h1>
+            <h1> Add Products: </h1>
 
-        <form  id="add-item-form">
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="productname">Product Name</label>
-                        <input type="text" class="form-control" name="productname" id="productname" placeholder="Enter Product Name">
+            <form id="add-item-form">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="productname">Product Name</label>
+                            <input type="text" class="form-control" name="productname" id="productname" placeholder="Enter Product Name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="description">Product Description</label>
+                            <input type="text" class="form-control" name="description" id="description" placeholder="Enter product description">
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="description">Product Description</label>
-                        <input type="text" class="form-control" name="description" id="description" placeholder="Enter product description">
-                    </div>
-                </div>
-            </div>
-            
-            <button type="submit" id="insert" name="submit" class="btn btn-success">Add Product</button>
-        </form>
+
+                <button type="submit" id="insert" name="submit" class="btn btn-success">Add Product</button>
+            </form>
     </div>
 
     <script>
-            $(document).ready(function () {
-                $('#add-item-form').on("submit", function(event) {
-                    event.preventDefault();
-                    
-                    
-                   $.ajax({
-                       url: "iform.php",
-                       method: "POST",
-                       data:$('#add-item-form').serialize(),
-                       beforeSend:function() { $('#insert').val("Adding...");},
-                       success:function(data)
-                       {
-                            $('#insert').val("Insert");
-                            $('#add-item-form')[0].reset(); 
-                            $('.container').html(data); 
-                           
-                           
-                       }
-                   })
-                });
+        $(document).ready(function () {
+            $('#add-item-form').on("submit", function (event) {
+                event.preventDefault();
+
+
+                $.ajax({
+                    url: "iform.php",
+                    method: "POST",
+                    data: $('#add-item-form').serialize(),
+                    beforeSend: function () {
+                        $('#insert').val("Adding...");
+                    },
+                    success: function (data) {
+                        $('#insert').val("Insert");
+                        $('#add-item-form')[0].reset();
+                        $('.container').html(data);
+                    }
+                })
             });
-
-            
-        </script>
-
+        });
+    </script>
 
 
-<?php
+
+    <?php
     require_once('includes/header.php');
 ?>

@@ -32,11 +32,16 @@ require_once('includes/header.php');
 
         <article>
             <p>
-                Avenu is the first online marketplace desgined specifically for high school students. Upload
-                items to your profile that you want to sell, or browse others' profiles for things to buy.
+                Avenu is the first online marketplace desgined specifically for high school students. Upload items to your profile that you
+                want to sell, or browse others' profiles for things to buy.
             </p>
-            <p>See something you like? Simply click "BUY NOW" and fill in your purchase info. We'll take care of the rest.</p>
-            <p>For a complete list of rules and regulations, click <a href="rules.php">here.</a></p>
+            <p>
+                See something you like? Simply click "BUY NOW" and fill in your purchase info. We'll take care of the rest.
+            </p>
+            <p>
+                For a complete list of rules and regulations, click
+                <a href="rules.php">here.</a>
+            </p>
         </article>
 
     </div>

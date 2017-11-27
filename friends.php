@@ -28,9 +28,9 @@ if ($view == $username) {
 }
 ?>
 
-<div class="container">
+        <div class="container">
 
-<h2>Friends</h2>
+            <h2>Friends</h2>
 
 <?php
 
@@ -95,9 +95,9 @@ if (!$friends) {
   echo "<a class='btn btn-info' href='messages.php?view=$view'>" .
        "View $name2 messages</a>\n<br>\n";
 ?>
-<br>
-<br>
-</div>
+                <br>
+                <br>
+        </div>
 
 <?php
 require_once("includes/footer.php");

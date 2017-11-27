@@ -8,13 +8,11 @@ require_once('includes/functions.php');
 check_cookie();
 authenticate();
 
-
-        require('includes/db.php');
+        require_once('includes/db.php');
         if(!empty($_POST))
         {
             $output = '';
            
-
             $username = $_SESSION['username'];
             
                         $query = "SELECT * FROM `users` WHERE username='$username'";
@@ -64,23 +62,29 @@ authenticate();
                             $_SESSION['lastname'] = $lastname;
 
                             ?>
-                            
-                            <table class="table table-bordered" id="profile_table">
-                            <tr>
-                                <th>Name</th>
-                                <td><?php echo $firstname . " " . $lastname ?></td>
-                            </tr>
-                            <tr>
-                                <th>Username</th>
-                                <td><?php echo $_SESSION["username"] ?></td>
-                            </tr>
-                            <tr>
-                                <th>Email address</th>
-                                <td><?php echo $_SESSION["email"] ?></td>
-                            </tr>
-                            </table>        
-                         
-                          <?php
+
+    <table class="table table-bordered" id="profile_table">
+        <tr>
+            <th>Name</th>
+            <td>
+                <?php echo $firstname . " " . $lastname ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Username</th>
+            <td>
+                <?php echo $_SESSION["username"] ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Email address</th>
+            <td>
+                <?php echo $_SESSION["email"] ?>
+            </td>
+        </tr>
+    </table>
+
+    <?php
                             // header("Refresh:1");
                             // header("Location: profile.php");
                         } else {
@@ -103,16 +107,9 @@ authenticate();
 
                         ?>
 
-                       
-
-                        <?php
-                       
-            
-                        
-
+        <?php
             
         }
     }
 
 ?>
-

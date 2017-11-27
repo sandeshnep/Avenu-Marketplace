@@ -1,56 +1,44 @@
 <?php
+if(!isset($_SESSION['username'])) {
+    session_start();
+}
 $pagename = "PROFILE";
 require_once('includes/functions.php');
 check_cookie();
 
 authenticate();
 
-require('includes/db.php');
+require_once('includes/header.php');
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/profile.css" />
-    <link rel="stylesheet" href="css/forms.css" />
-</head>
-
-<body>
-
-   
-    <?php
-    include("includes/navigation-bar.php");
-    require_once('includes/header.php');
-    ?>
 
     <div class="jumbotron rounded-0 p-tron">
         <div class="container">
-            <h1><?php echo ' I am ' . '<span id="firstname">' . $_SESSION['firstname'] . '</span>' ?></h1>
+            <h1>
+                <?php echo ' I am ' . '<span id="firstname">' . $_SESSION['firstname'] . '</span>' ?>
+            </h1>
         </div>
-    </div> 
+    </div>
 
     <div class='container'>
 
         <table class="table table-bordered" id="profile_table">
             <tr>
                 <th>Name</th>
-                <td><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?></td>
+                <td>
+                    <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?>
+                </td>
             </tr>
             <tr>
                 <th>Username</th>
-                <td><?php echo $_SESSION['username'] ?></td>
+                <td>
+                    <?php echo $_SESSION['username'] ?>
+                </td>
             </tr>
             <tr>
                 <th>Email address</th>
-                <td><?php echo $_SESSION['email'] ?></td>
+                <td>
+                    <?php echo $_SESSION['email'] ?>
+                </td>
             </tr>
         </table>
 
@@ -63,7 +51,7 @@ require('includes/db.php');
         <h3>Update account Information</h3>
         <br>
 
-        <form  id="update_form">
+        <form id="update_form">
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -99,29 +87,28 @@ require('includes/db.php');
     include("includes/footer.php");
     ?>
 
-    <script>
+        <script>
             $(document).ready(function () {
-                $('#update_form').on("submit", function(event) {
+                $('#update_form').on("submit", function (event) {
                     event.preventDefault();
-                    
-                   $.ajax({
-                       url: "pform.php",
-                       method: "POST",
-                       data:$('#update_form').serialize(),
-                       beforeSend:function() { $('#insert').val("Updating...");},
-                       success:function(data)
-                       {
+
+                    $.ajax({
+                        url: "pform.php",
+                        method: "POST",
+                        data: $('#update_form').serialize(),
+                        beforeSend: function () {
+                            $('#insert').val("Updating...");
+                        },
+                        success: function (data) {
                             $('#insert').val("Insert");
-                            $('#update_form')[0].reset(); 
-                            $('#profile_table').html(data); 
-                           
-                       }
-                   })
+                            $('#update_form')[0].reset();
+                            $('#profile_table').html(data);
+
+                        }
+                    })
                 });
             });
-
-            
         </script>
-</body>
-</html>
+        </body>
 
+        </html>
