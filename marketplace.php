@@ -18,37 +18,23 @@ require_once('includes/header.php');
         if(isset($_SESSION['username'])){
             $username = $_SESSION['username'];
 
-            $query = "SELECT * FROM `users`";
+            $query = "SELECT * FROM `products`";
             $result = mysqli_query($connect, $query) or die(mysqli_error());
             $rows = mysqli_num_rows($result);
            
-            for($i=0; $i<=$rows+2; $i++){
-
-            	$query = "SELECT * FROM `users` WHERE id='$i'";
-            	$result = mysqli_query($connect, $query) or die(mysqli_error());
-            	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-            	if($row['id']!=''){
-
-            		$tempuser = $row['username'];
-
-            		$query2 = "SELECT * FROM `products` WHERE username='$tempuser'";
-            		$result2 = mysqli_query($connect, $query2) or die(mysqli_error());
-            		$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+            for($i=0; $i<=100; $i++){
                 
-	                echo '<ul><li><b>Name: </b>' . $row['firstname'] . ' ' . $row['lastname']. '</li><li><b>Username: </b>' .
-	                $row['username'] . '</li><li><b>Product name: </b>' . $row2['name'] . 
-	                '</li><li><b>Description: </b>' . $row2['description'] . '</ul>'; 
-	                // '<br><b>product description: </b>' . $row['description']  . '<br><b>by user: </b>' . $row['username'] . '<br><b>date posted: </b>' . $row['date'] . '
-	                // </li>
-	                // <form name = "delete" method = "POST">
-	                // <button type="submit" name="delete" value = "' . $row['productid'].'" class="btn btn-success">Delete</button>
-	                // </form><hr>';
+                $query2 = "SELECT * FROM `products` WHERE productid='$i'";
+                $result2 = mysqli_query($connect, $query2) or die(mysqli_error());
+                $row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 
-            	}
+                if($row2['productid']!=''){
+
+                        echo '<ul><li><b>Username: </b>' . $i . '</li><li><b>Product name: </b>' . $row2['name'] . 
+                        '<li><b>Date Posted: </b>' . $row2['timesql'].'</li><li><b>Description: </b>' . $row2['description'] . '</ul>';
+
+                } 
             }
-
-           echo '</ul>';
 
         }
         ?>
