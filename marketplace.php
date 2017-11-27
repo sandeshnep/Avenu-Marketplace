@@ -30,7 +30,7 @@ require_once('includes/header.php');
 
                 if($row2['productid']!=''){
 
-                        echo '<ul><li><b>Username: </b>' . $i . '</li><li><b>Product name: </b>' . $row2['name'] . 
+                        echo '<ul><li><b>Username: </b>' . $row2['username'] . '</li><li><b>Product name: </b>' . $row2['name'] . 
                         '<li><b>Date Posted: </b>' . $row2['timesql'].'</li><li><b>Description: </b>' . $row2['description'] . '</ul>';
 
                 } 
