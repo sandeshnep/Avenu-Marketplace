@@ -40,7 +40,7 @@
                         <a class="nav-link" href="myproducts.php">My Marketplace</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">
+                        <a class="nav-link" id="navname" href="profile.php">
                             <?php echo $_SESSION['firstname'] ?>
                         </a>
                     </li>

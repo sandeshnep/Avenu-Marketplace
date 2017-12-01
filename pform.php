@@ -61,7 +61,18 @@ authenticate();
                             $_SESSION['firstname'] = $firstname;
                             $_SESSION['lastname'] = $lastname;
 
+                            
+                            
+                            
+
                             ?>
+
+                        
+    
+    <script>
+        document.getElementById("navname").innerHTML = "<?php echo $firstname ?>";
+        document.getElementById("firstname").innerHTML = "<?php echo $firstname ?>";
+    </script>
 
     <table class="table table-bordered" id="profile_table">
         <tr>
@@ -113,3 +124,5 @@ authenticate();
     }
 
 ?>
+
+

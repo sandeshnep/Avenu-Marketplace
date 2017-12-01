@@ -56,7 +56,7 @@ require_once('includes/header.php');
                 <div class="col">
                     <div class="form-group">
                         <label for="firstname">First Name</label>
-                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter your first name">
+                        <input type="text" class="form-control" name="firstname" id="xfirstname" placeholder="Enter your first name">
                     </div>
                 </div>
                 <div class="col">
@@ -91,7 +91,7 @@ require_once('includes/header.php');
             $(document).ready(function () {
                 $('#update_form').on("submit", function (event) {
                     event.preventDefault();
-
+                    
                     $.ajax({
                         url: "pform.php",
                         method: "POST",
@@ -100,14 +100,18 @@ require_once('includes/header.php');
                             $('#insert').val("Updating...");
                         },
                         success: function (data) {
+                        
                             $('#insert').val("Insert");
                             $('#update_form')[0].reset();
                             $('#profile_table').html(data);
+                            
 
                         }
                     })
                 });
             });
+
+    
         </script>
         </body>
 
