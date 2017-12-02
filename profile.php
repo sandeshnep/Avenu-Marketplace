@@ -9,6 +9,8 @@ check_cookie();
 authenticate();
 
 require_once('includes/header.php');
+
+
 ?>
 
     <div class="jumbotron rounded-0 p-tron">
@@ -45,8 +47,50 @@ require_once('includes/header.php');
     </div>
 
     <br>
+    
+     <?php 
+        require_once('includes/db.php');
 
-    <div class="container">
+        if(isset($_POST['delete'])){
+
+            echo'<h1>DELETE BUTTON PRESSED </h1>';
+
+            $username = $_SESSION['username'];
+            echo 'username : '. $username ;
+
+
+               //Delete a username in the database
+                $query2 = "DELETE * FROM `users` WHERE username='$username'";
+                $result2 = mysqli_query($connect, $query2);
+                session_start();
+                 $_SESSION = array();
+                session_unset();
+                session_destroy();
+                //deleting cookies
+                setcookie("username", "", time()-1, "/" );
+                setcookie("password", "", time()-1, "/" );
+                header("Location:term-project-group-24/term-project-group-24/login.php");
+            
+
+
+
+            }
+            ?>
+
+
+         
+            <form method = "POST">
+            <button type="submit" name="delete" class="btn btn-success">Delete</button>
+            </form> ;
+
+        
+
+    </br>
+
+
+
+
+
 
         <h3>Update account Information</h3>
         <br>
@@ -78,6 +122,9 @@ require_once('includes/header.php');
             </div>
             <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
         </form>
+
+        
+
 
     </div>
 
