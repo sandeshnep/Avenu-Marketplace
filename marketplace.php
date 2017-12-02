@@ -22,9 +22,11 @@ require_once('includes/header.php');
             $result = mysqli_query($connect, $query) or die(mysqli_error());
             $rows = mysqli_num_rows($result);
            
-            for($i=0; $i<=100; $i++){
+             while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+
+                $currentprodid= $row['productid'];
                 
-                $query2 = "SELECT * FROM `products` WHERE productid='$i'";
+                $query2 = "SELECT * FROM `products` WHERE productid='$currentprodid'";
                 $result2 = mysqli_query($connect, $query2) or die(mysqli_error());
                 $row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 
