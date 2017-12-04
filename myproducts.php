@@ -39,7 +39,7 @@ require_once('includes/header.php');
             
 
             //SQL command to add a product on to the database
-			$query = "INSERT INTO products VALUES (productid, '$username', '$prodname', '$description', CURRENT_TIMESTAMP)";
+			$query = "INSERT INTO products VALUES (productid, '$username', '$prodname', '$description', CURRENT_TIMESTAMP, img1, img2, img3)";
 
 			$result = mysqli_query($connect, $query);
 
@@ -106,10 +106,10 @@ require_once('includes/header.php');
                 
                 ';
 
-                //SQL commands for pulling comments from reviews table
+                //SQL commands for pulling commentsfrom reviews table
                 $query5 = "SELECT * FROM `reviews` WHERE productid='$currentprodid'";
                 $result5=mysqli_query($connect, $query5);
-                $rows5 = mysqli_num_rows($result5);
+                
 
                  while($row5 = mysqli_fetch_array($result5, MYSQLI_ASSOC)){
 
@@ -120,12 +120,37 @@ require_once('includes/header.php');
 
 
 
+                 echo'<br>
+
+                 <b>Pictures: </b>';
+
+                if(isset($row['img1'])){
+
+                    echo'<img src="'.$row['img1'].'" height="200" width="200">';
+                }
+                if(isset($row['img2'])){
+
+                    echo'<img src="'.$row['img2'].'" height="200" width="200">';
+                }
+                if(isset($row['img3'])){
+
+                    echo'<img src="'.$row['img3'].'" height="200" width="200">';
+                }
+
+
+
                  echo'
+                 <!----UPLOAD IMAGE HTML FORM !-->
+                 <form action ="includes/upload.php" method = "POST" enctype = "multipart/form-data" class="upload">
+                <input type = "file" name = "image" />
+                <input type = "submit"/>
+                <input type = "hidden" name ="idproductimg" value="'.$currentprodid.'">
+
+                </form>
 
 
-                 
+                <!--Delete Button !-->
                  <button name="delete" id="'.$currentprodid.'" class="btn btn-danger">Delete Item</button>
-                
 
                  ';
 
@@ -166,6 +191,7 @@ require_once('includes/header.php');
     
 <script>
 
+    //------------------------ajax for deleting items
     $("body").on('click', '.btn.btn-danger', function(e){
         //alert(e.target.id);
 
@@ -185,6 +211,32 @@ require_once('includes/header.php');
         })
 
         });
+
+
+    //-----------------------ajax for uploading pictures
+    $('.upload').on("submit", function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "includes/upload.php",
+            data: new FormData(this),             
+            cache: false,
+            contentType: false, 
+            processData: false,
+            success: function(response, textStatus, jqXHR)
+            {
+                $result = $(response).find("#refreshajax");
+                $("#refreshajax").html($result);  
+            }
+    });
+    
+});
+
+
+
+
+
 
   //---------------------------ajax for adding items
   $('#add-item-form').on("submit", function(event) {

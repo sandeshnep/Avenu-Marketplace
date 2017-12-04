@@ -76,10 +76,30 @@ require_once('includes/header.php');
                 if($row2['productid']!=''){
 
                     echo '<ul><li><b>Username: </b>' . $row2['username'] . '</li><li><b>Product name: </b>' . $row2['name'] . 
-                        '<li><b>Date Posted: </b>' . $row2['timesql'].'</li><li><b>Description: </b>' . $row2['description'] . '<li><b>Average Rating: ' . $row3['avg_rating'] . '</b></li>'. '</ul>' . '<br><b>Your Rating:
+                        '<li><b>Date Posted: </b>' . $row2['timesql'].'</li><li><b>Description: </b>' . $row2['description'] . '<li><b>Average Rating: ' . $row3['avg_rating'] . '</b></li>'. '</ul>' . '
+
+                <br><b>Pictures: </b></br> ';
+
+                if(isset($row2['img1'])){
+
+                    echo'<img src="'.$row['img1'].'" height="200" width="200">';
+                }
+                if(isset($row2['img2'])){
+
+                    echo'<img src="'.$row['img2'].'" height="200" width="200">';
+                }
+                if(isset($row2['img3'])){
+
+                    echo'<img src="'.$row2['img3'].'" height="200" width="200">';
+                }
+
+
+
+                echo'<br><b>Your Rating:
 
 
                 <!-- UPDATE RATINGS - MOVE TO COMMON MARKET!--> 
+
                 <form method="POST">
                 <select name = "ratingval">
                 <option type ="number" value = "1">1</option>
@@ -98,6 +118,7 @@ require_once('includes/header.php');
                 <!-- UPDATE RATINGS - MOVE TO COMMON MARKET END!-->
 
                 </li>
+
 
                 <br>
                 <b>
