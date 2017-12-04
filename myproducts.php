@@ -143,7 +143,7 @@ require_once('includes/header.php');
                  <!----UPLOAD IMAGE HTML FORM !-->
                  <form action ="includes/upload.php" method = "POST" enctype = "multipart/form-data" class="upload">
                 <input type = "file" name = "image" />
-                <input type = "submit"/>
+                <input type = "submit" class = "uploadsubmit"/>
                 <input type = "hidden" name ="idproductimg" value="'.$currentprodid.'">
 
                 </form>
@@ -193,7 +193,6 @@ require_once('includes/header.php');
 
     //------------------------ajax for deleting items
     $("body").on('click', '.btn.btn-danger', function(e){
-        //alert(e.target.id);
 
                                                      
         $.ajax({
@@ -214,6 +213,7 @@ require_once('includes/header.php');
 
 
     //-----------------------ajax for uploading pictures
+    $(document).on("click" , ".uploadsubmit", function(e){
     $('.upload').on("submit", function(e){
         e.preventDefault();
 
@@ -229,6 +229,7 @@ require_once('includes/header.php');
                 $result = $(response).find("#refreshajax");
                 $("#refreshajax").html($result);  
             }
+    });
     });
     
 });
