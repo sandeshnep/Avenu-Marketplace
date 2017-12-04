@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/New_York');
 $pagename = "MESSAGES";
 require_once('includes/functions.php');
 check_cookie();
@@ -23,8 +24,7 @@ if (isset($_POST['text'])) {
     if ($text != "") {
         $pm   = substr(sanitizeString($_POST['pm']), 0, 1);
         $time = time();
-        queryMysql("INSERT INTO messages VALUES(NULL, '$username',
-      '$view', '$pm', $time, '$text')");
+        queryMysql("INSERT INTO messages VALUES(NULL, '$username', '$view', '$pm', $time, '$text')");
     }
 }
 

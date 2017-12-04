@@ -19,6 +19,7 @@ if (isset($_SESSION['username'])) {
   echo "<title>$appname" . " | " . "$pagename</title>\n" .
         "<meta charset='UTF-8'>\n" .
         "<meta name='viewport' content='width=device-width, initial-scale=1'>\n" .
+        "<link rel='stylesheet' href='font-awesome/css/font-awesome.min.css' />\n" .
         "<link rel='stylesheet' href='css/bootstrap.min.css'>\n" .
         "<link rel='stylesheet' href='css/styles.css' />\n" .
         "<link rel='stylesheet' href='css/forms.css' />\n" .        

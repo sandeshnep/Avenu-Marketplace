@@ -11,9 +11,9 @@
             <?php
             if (isset($_SESSION["username"])) {
                 echo
-                "<a class='nav-item nav-link' href='members.php'>Members</a>\n 
-                <a class='nav-item nav-link' href='friends.php'>Friends</a>\n
-                <a class='nav-item nav-link' href='messages.php'>Messages</a>\n
+                "<a class='nav-item nav-link' href='members.php' title='Members' alt='Members'><i class='fa fa-users' aria-hidden='true'></i></a>\n 
+                <a class='nav-item nav-link' href='friends.php' title='Friends' alt='Friends'><i class='fa fa-address-book' aria-hidden='true'></i></a>\n
+                <a class='nav-item nav-link' href='messages.php' title='Messages' alt='Messages'><i class='fa fa-envelope' aria-hidden='true'></i></a>\n
                 ";
             }
             ?>
@@ -34,18 +34,18 @@
                 if (isset($_SESSION["username"])) {
                 ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="marketplace.php">Common Marketplace</a>
+                        <a class="nav-link" href="marketplace.php" title='Marketplace' alt='Marketplace'><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="myproducts.php">My Marketplace</a>
+                        <a class="nav-link" href="myproducts.php" title='My Products' alt='My Products'><i class="fa fa-archive" aria-hidden="true"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="navname" href="profile.php">
+                        <a class="nav-link" id="navname" href="profile.php"title='My Profile' alt='My Profile'>
                             <?php echo $_SESSION['firstname'] ?>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="includes/logout.php">Logout</a>
+                        <a class="nav-link" href="includes/logout.php" title='Logout' alt='Logout'><i class='fa fa-sign-out' aria-hidden='true'></i></a>
                     </li>
                     <?php ;
                 }

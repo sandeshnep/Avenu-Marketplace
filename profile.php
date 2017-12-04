@@ -120,7 +120,7 @@ require_once('includes/header.php');
                 <label for="oldpassword">Current password</label>
                 <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Enter current password">
             </div>
-            <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
+            <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-info" />
         </form>
 
         
