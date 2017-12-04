@@ -19,5 +19,6 @@ Sample SQL Commands:
 5) Write reviews for a product
 	INSERT INTO `reviews`(`username`, `productid`, `rating`, `comments`, `authorid`) VALUES ('sandeshnep',1,5,'very very gord','zubair')
 
+changy 
 6) Delete reviews for a product
 	DELETE FROM `reviews` WHERE productid=1 AND authorid='sandeshnep'
