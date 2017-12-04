@@ -142,9 +142,9 @@ require_once('includes/header.php');
                  echo'
                  <!----UPLOAD IMAGE HTML FORM !-->
                  <form action ="includes/upload.php" method = "POST" enctype = "multipart/form-data" class="upload">
-                <input type = "file" name = "image" />
-                <input type = "submit" class = "uploadsubmit"/>
-                <input type = "hidden" name ="idproductimg" value="'.$currentprodid.'">
+                    <input type = "file" name ="image" class = "image" attribute ="'.$currentprodid.'"/>
+                    <input type = "submit" class = "uploadsubmit"/>
+                    <input type = "hidden" name ="idproductimg" value="'.$currentprodid.'">
 
                 </form>
 
@@ -194,6 +194,7 @@ require_once('includes/header.php');
     //------------------------ajax for deleting items
     $("body").on('click', '.btn.btn-danger', function(e){
 
+        
                                                      
         $.ajax({
             url: "myproducts.php",
@@ -213,9 +214,12 @@ require_once('includes/header.php');
 
 
     //-----------------------ajax for uploading pictures
-    $(document).on("click" , ".uploadsubmit", function(e){
-    $('.upload').on("submit", function(e){
+    $("body").on("submit", ".upload", function(e){
+
         e.preventDefault();
+
+        //if an image is selected, run ajax
+        if($(this).children('input')[0].files.length>0){
 
         $.ajax({
             type: "POST",
@@ -229,12 +233,9 @@ require_once('includes/header.php');
                 $result = $(response).find("#refreshajax");
                 $("#refreshajax").html($result);  
             }
-    });
+    }) }
     });
     
-});
-
-
 
 
 
