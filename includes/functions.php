@@ -95,12 +95,10 @@ function check_cookie() {
     //for pages like login.php. If there is a cookie, then the redirect function takes to index.php.
     //Note: must be run after check_cookie function.
 function redirect() {
-    
     if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
         header( 'Location: index.php' ) ;
     }
-
-    if (isset($_SESSION['username'])){
+    if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
         header( 'Location: index.php' ) ;
     }
 }

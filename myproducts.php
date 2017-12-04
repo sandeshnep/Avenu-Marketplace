@@ -10,10 +10,8 @@ authenticate();
 require_once('includes/header.php');
 
 ?>
-    
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> 
 
-
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
     <div class="jumbotron rounded-0">
         <h2>
@@ -25,7 +23,6 @@ require_once('includes/header.php');
     <br>
 
     <div class="container">
-
 
         <?php
     	require_once('includes/db.php');
@@ -45,7 +42,6 @@ require_once('includes/header.php');
 
 		} 
 
-
         //DELETION-------------------------------------------------------
         if(isset($_POST['delete']) and is_numeric($_POST['delete'])){
 
@@ -56,20 +52,15 @@ require_once('includes/header.php');
         $query2 = "DELETE FROM `products` WHERE productid='$iddelete'";
         $result2 = mysqli_query($connect, $query2);
 
-
         }
-
 
         ?>
 
+            <h3> Your Products: </h3>
 
+            <div id="refreshajax">
 
-
-    <h1> Your Products: </h1>
-
-    <div id="refreshajax">
-
-    <?php 
+                <?php 
         if(isset($_SESSION['username'])){
         	$username = $_SESSION['username'];
 
@@ -143,7 +134,7 @@ require_once('includes/header.php');
                  <!----UPLOAD IMAGE HTML FORM !-->
                  <form action ="includes/upload.php" method = "POST" enctype = "multipart/form-data" class="upload">
                     <input type = "file" name ="image" class = "image" attribute ="'.$currentprodid.'"/>
-                    <input type = "submit" class = "uploadsubmit"/>
+                    <button type="submit" class="uploadsubmit btn btn-info"/>Upload</button>
                     <input type = "hidden" name ="idproductimg" value="'.$currentprodid.'">
 
                 </form>
@@ -161,12 +152,12 @@ require_once('includes/header.php');
         }
         ?>
 
-       
-
-    </div>
 
 
-            <h1> Add Products: </h1>
+            </div>
+
+
+            <h3> Add new product: </h3>
 
             <form id="add-item-form">
                 <div class="row">
@@ -184,86 +175,84 @@ require_once('includes/header.php');
                     </div>
                 </div>
 
-                <button type="submit" id="insert" name="submit" class="btn btn-success">Add Product</button>
+                <button type="submit" id="insert" name="submit" class="btn btn-info">Add Product</button>
             </form>
 
 
-    
-<script>
 
-    //------------------------ajax for deleting items
-    $("body").on('click', '.btn.btn-danger', function(e){
-
-        
-                                                     
-        $.ajax({
-            url: "myproducts.php",
-            method: "POST",
-            dataType:"html",
-            data:{delete:e.target.id},
-                
-            success:function(response, textStauts, jqXHR){
-
-                $result = $(response).find("#refreshajax");
-                $("#refreshajax").html($result);  
-                                           
-            }
-        })
-
-        });
-
-
-    //-----------------------ajax for uploading pictures
-    $("body").on("submit", ".upload", function(e){
-
-        e.preventDefault();
-
-        //if an image is selected, run ajax
-        if($(this).children('input')[0].files.length>0){
-
-        $.ajax({
-            type: "POST",
-            url: "includes/upload.php",
-            data: new FormData(this),             
-            cache: false,
-            contentType: false, 
-            processData: false,
-            success: function(response, textStatus, jqXHR)
-            {
-                $result = $(response).find("#refreshajax");
-                $("#refreshajax").html($result);  
-            }
-    }) }
-    });
-    
+            <script>
+                //------------------------ajax for deleting items
+                $("body").on('click', '.btn.btn-danger', function (e) {
 
 
 
+                    $.ajax({
+                        url: "myproducts.php",
+                        method: "POST",
+                        dataType: "html",
+                        data: {
+                            delete: e.target.id
+                        },
 
-  //---------------------------ajax for adding items
-  $('#add-item-form').on("submit", function(event) {
+                        success: function (response, textStauts, jqXHR) {
 
-    event.preventDefault(); //prevents refresh
-                                     
-   $.ajax({
-   url: "myproducts.php",
-   method: "POST",
-   dataType:'html',
-   data:$('#add-item-form').serialize(),
+                            $result = $(response).find("#refreshajax");
+                            $("#refreshajax").html($result);
 
-   success:function(response, textStauts, jqXHR){
-       $result = $(response).find('#refreshajax');
-       $('#refreshajax').html($result);  
-                           
-       }
-    })
-  });
+                        }
+                    })
+
+                });
 
 
-            
-</script>
+                //-----------------------ajax for uploading pictures
+                $("body").on("submit", ".upload", function (e) {
+
+                    e.preventDefault();
+
+                    //if an image is selected, run ajax
+                    if ($(this).children('input')[0].files.length > 0) {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "includes/upload.php",
+                            data: new FormData(this),
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function (response, textStatus, jqXHR) {
+                                $result = $(response).find("#refreshajax");
+                                $("#refreshajax").html($result);
+                            }
+                        })
+                    }
+                });
 
 
 
-    <?php
+
+
+                //---------------------------ajax for adding items
+                $('#add-item-form').on("submit", function (event) {
+
+                    event.preventDefault(); //prevents refresh
+
+                    $.ajax({
+                        url: "myproducts.php",
+                        method: "POST",
+                        dataType: 'html',
+                        data: $('#add-item-form').serialize(),
+
+                        success: function (response, textStauts, jqXHR) {
+                            $result = $(response).find('#refreshajax');
+                            $('#refreshajax').html($result);
+
+                        }
+                    })
+                });
+            </script>
+
+
+
+            <?php
     require_once('includes/header.php'); ?>

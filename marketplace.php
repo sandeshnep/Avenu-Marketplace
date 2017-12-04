@@ -12,7 +12,9 @@ require_once('includes/header.php');
 
     <div class="jumbotron rounded-0">
         <h2>Common Marketplace</h2>
+    </div>
 
+    <div class="container">
         <?php 
         require_once('includes/db.php');
         if(isset($_SESSION['username'])){
@@ -112,7 +114,7 @@ require_once('includes/header.php');
                 </b>' .
                 '
 
-                <button type="submit" name = "rating" method ="POST" value = "' . $row2['productid'] .'"class="btn btn-success">Update Rating</button>
+                <button type="submit" name = "rating" method ="POST" value = "' . $row2['productid'] .'"class="btn btn-info">Update Rating</button>
                 </form>
 
                 <!-- UPDATE RATINGS - MOVE TO COMMON MARKET END!-->
@@ -180,7 +182,7 @@ require_once('includes/header.php');
                      <br>
                      <br>
 
-                     <button type="submit" name="postcomment" value = "' . $row['productid'].'" class="btn btn-success"> Post Comment
+                     <button type="submit" name="postcomment" value = "' . $row['productid'].'" class="btn btn-info"> Post Comment
                      </button>
 
                  </form>
@@ -190,11 +192,7 @@ require_once('includes/header.php');
                 } 
             }
         }
-    
-
         ?>
-
-
     </div>
 
     <script src="scripts/jquery-3.2.1.slim.min.js" </script>

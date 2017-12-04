@@ -1,6 +1,5 @@
 <?php
 $pagename = "LOGIN";
-session_start();
 require_once('includes/functions.php');
 check_cookie();
 redirect();

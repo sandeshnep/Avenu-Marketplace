@@ -1,17 +1,31 @@
 .jumbotron {
-    background-color: #305948;
+    background-color: #26a69a;
     color: #f4f4f0;
     text-align: center;
     font-family: "Tahoma", Tahoma, sans-serif;
 }
 
 body {
+    background-color: #e8eaf6;
     font-family: "Tahoma", Tahoma, sans-serif;
 }
 
 .navbar,
 .footer {
-    background-color: #162820;
+    background-color: #00897b;
+}
+
+.footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: left;
+    padding: 0.5em; 
+}
+
+.right {
+    float: right;
 }
 
 table {
@@ -19,12 +33,20 @@ table {
 }
 
 a {
-    color: #5A8238;
-    font-size: 1.1em;
+    color: #006064;
 }
 
 a:hover {
-    color: #72992F;
+    color: #00838f;
+}
+
+nav a, footer a {
+    color: #b3e5fc;
+    font-size: 1.1em;
+}
+
+nav a:hover, footer a:hover {
+    color: #e1f5fe;
     text-decoration: none;
 }
 

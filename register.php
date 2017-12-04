@@ -81,7 +81,7 @@ require_once('includes/header.php');
                 <label for="password2">Verify password</label>
                 <input type="password" class="form-control" name="password2" id="password2" placeholder="Re-enter password">
             </div>
-            <button type="submit" name="submit" class="btn btn-success">Register</button>
+            <button type="submit" name="submit" class="btn btn-info">Register</button>
         </form>
     </div>
 
