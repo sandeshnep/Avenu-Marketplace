@@ -15,8 +15,8 @@
 
 
 
-        //insert imageurl to the database
-   		$username = $_SESSION['username'];
+    //insert imageurl to the database
+   	$username = $_SESSION['username'];
 		$prodid = stripslashes($_POST['idproductimg']);
 		$produrl = "img/prodimg/".$file_name;
 
