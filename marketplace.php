@@ -75,7 +75,8 @@ require_once('includes/header.php');
                     echo '
                     <div class="card">' . "\r\n" .
                     '<div class="card-body">' . "\r\n" .
-                    '<h4 class="card-title">' . $row['name'] . '</h4>' . "\r\n";
+                    '<h4 class="card-title">' . $row['name'] . '</h4>' . "\r\n" .
+                    '<hr>' . "\r\n";
                     
                     if(isset($row2['img1'])) {
                         echo'<img src="'.$row['img1'].'" height="200" width="200">'. "\r\n";
@@ -90,7 +91,6 @@ require_once('includes/header.php');
                     
                     echo
                     '<ul>' .
-                    '<hr>' . "\r\n" .
                     '<li><b>Username: </b>' . $row2['username'] . '</li>' . "\r\n" . 
                     '<li><b>Date Posted: </b>' . $row2['timesql'] . '</li>' . "\r\n" .
                     '<li><b>Description: </b>' . $row2['description'] . '</li>' . "\r\n" .
@@ -147,27 +147,27 @@ require_once('includes/header.php');
                                 refresh();
                             }
                         }
-                            echo '
-                            <!-- form for adding a comment !-->
-                            <br> <br> <b> Add Comment: </b>
-                            <form name = "comment" method = "POST">
-                            <input name="commentinput" type = "text">
-                            <br>
-                            <br>
-                            <button type="submit" name="postcomment" value = "' . $row['productid'].'" class="btn btn-info">Post Comment</button>
-                            </form>
-                            <br>
-                            ';
-                        } 
                     }
                     echo '
-                    </div>
-                    </div>
+                    <!-- form for adding a comment !-->
+                    <br> <br> <b> Add Comment: </b>
+                    <form name = "comment" method = "POST">
+                    <input name="commentinput" type = "text">
                     <br>
-                    <br>';
+                    <br>
+                    <button type="submit" name="postcomment" value = "' . $row['productid'].'" class="btn btn-info">Post Comment</button>
+                    </form>
+                    <br>
+                    '; 
                 }
+                echo '
+                </div>
+                </div>
+                <br>
+                <br>';
             }
-    ?>
+        }
+        ?>
     </div>
 
     <script src="scripts/jquery-3.2.1.slim.min.js"></script>
