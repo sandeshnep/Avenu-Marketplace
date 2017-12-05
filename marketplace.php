@@ -146,6 +146,7 @@ require_once('includes/header.php');
                                 $result6=mysqli_query($connect, $query6);
                                 refresh();
                             }
+                        }
                             echo '
                             <!-- form for adding a comment !-->
                             <br> <br> <b> Add Comment: </b>
@@ -157,7 +158,6 @@ require_once('includes/header.php');
                             </form>
                             <br>
                             ';
-                        }
                         } 
                     }
                     echo '
