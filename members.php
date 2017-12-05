@@ -10,6 +10,11 @@ authenticate();
 require_once('includes/header.php');
 ?>
 
+    <div class="jumbotron rounded-0">
+        <h2>Members</h2>
+        <div class="lead">Find other members here</div>
+    </div>
+
 <div class="container">
 <br>
 
@@ -71,7 +76,7 @@ for ($j = 0; $j < $num; ++$j) {
         echo " &larr; Already following";
     } elseif ($t2) {
         echo " &rarr; is following you";
-        $follow = "recip";
+        $follow = "follow back";
     }
     
     if (!$t1) {
@@ -87,3 +92,5 @@ for ($j = 0; $j < $num; ++$j) {
 <?php
 require_once("includes/footer.php");
 ?>
+</body>
+</html>

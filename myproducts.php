@@ -15,7 +15,7 @@ require_once('includes/header.php');
 
     <div class="jumbotron rounded-0">
         <h2>
-            <?php echo $_SESSION['firstname'] ."'s Marketplace" . '</span>' ?>
+            <?php echo '<span>' . $_SESSION['firstname'] ."'s Marketplace" . '</span>' ?>
         </h2>
         <p class="lead">Add, Update or Remove Products!</p>
     </div>
@@ -57,6 +57,8 @@ require_once('includes/header.php');
         ?>
 
             <h3> Your Products: </h3>
+            <br>
+            <br>
 
             <div id="refreshajax">
 
@@ -72,30 +74,48 @@ require_once('includes/header.php');
        	    
        	    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
-
                 $currentprodid= $row['productid'];
                 
-
-
                 //SQL commands for pulling ratings from reviews table
                 //select avg from the raitngs column
                 $query3 = "SELECT AVG(`rating`) as avg_rating FROM `reviews` WHERE productid='$currentprodid'";
                 $result3=mysqli_query($connect, $query3);
                 $row3 = mysqli_fetch_assoc($result3);
 
+                   echo '
+                   <li> 
+                   <div class="card">' .
+                   '<div class="card-body">' .
+                   '<h4 class="card-title">' . $row['name'] . '</h4>' .
+                   '<hr>
+                   ';
 
+                   echo'
+                   <br>
+                   <div class="product-image">';
+                   
+                   if(isset($row['img1'])){
+                       echo'<img src="'.$row['img1'].'" height="200" width="200">';
+                      }
+        
+                  if(isset($row['img2'])){
+                      echo'<img src="'.$row['img2'].'" height="200" width="200">';
+                  }
+                  if(isset($row['img3'])){
+                      echo'<img src="'.$row['img3'].'" height="200" width="200">';
+                  }
+                  echo'
+                  </div>
+                  <br>
+                  ' .
 
-       	    	echo '<li> <b>Productid : </b> ' . $row['productid'] . '<br><b>Product name: </b>' . $row['name']  . 
-                '<br><b>Product Description: </b>' . $row['description']  . '<br><b>Date Posted: </b>' . $row['timesql'] . '<br><b>Average Rating: ' . $row3['avg_rating'] . '</b>
-
-                <br>
-                <b>
-                Comments :</b>
-
-                </li>
-
-                
-                ';
+                   '<b>Product ID : </b> ' . $row['productid'] . 
+                   '<br><b>Description: </b>' . $row['description']  . 
+                   '<br><b>Date Posted: </b>' . $row['timesql'] . 
+                   '<br><b>Average Rating: ' . $row3['avg_rating'] . '</b>
+                   <br>
+                   <b> Comments :</b>
+                   ';
 
                 //SQL commands for pulling commentsfrom reviews table
                 $query5 = "SELECT * FROM `reviews` WHERE productid='$currentprodid'";
@@ -106,56 +126,40 @@ require_once('includes/header.php');
 
                     if(isset($row5["comments"])){
                     echo'
-                    <br>• by User: ' . $row5["authorid"] . '<br> &nbsp &nbsp &nbsp' . $row5["comments"];}
-                 }
-
-
-
-                 echo'<br>
-
-                 <b>Pictures: </b>';
-
-                if(isset($row['img1'])){
-
-                    echo'<img src="'.$row['img1'].'" height="200" width="200">';
+                    <br>•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span>';
                 }
-                if(isset($row['img2'])){
-
-                    echo'<img src="'.$row['img2'].'" height="200" width="200">';
-                }
-                if(isset($row['img3'])){
-
-                    echo'<img src="'.$row['img3'].'" height="200" width="200">';
-                }
-
-
+            }
 
                  echo'
+                 <br>
+
+                 <div>
                  <!----UPLOAD IMAGE HTML FORM !-->
+                 <br>
+                 <h4 class="lead">Upload image for this item</h4>
                  <form action ="includes/upload.php" method = "POST" enctype = "multipart/form-data" class="upload">
-                    <input type = "file" name ="image" class = "image" attribute ="'.$currentprodid.'"/>
-                    <button type="submit" class="uploadsubmit btn btn-info"/>Upload</button>
-                    <input type = "hidden" name ="idproductimg" value="'.$currentprodid.'">
-
-                </form>
-
-
-                <!--Delete Button !-->
-                 <button name="delete" id="'.$currentprodid.'" class="btn btn-danger">Delete Item</button>
-
+                 <input type = "file" name ="image" class = "image" attribute ="'.$currentprodid.'"/>
+                 <button type="submit" class="uploadsubmit btn btn-info">Upload</button>
+                 <input type="hidden" name="idproductimg" value="'.$currentprodid.'">
+                 </form>
+                 </div>
+                 <br>
+                 <!--Delete Button !-->
+                 <button name="delete" id="'.$currentprodid.'" class="btn btn-danger btn-lg btn-block">Delete Item</button>
+                 </div>
+                 </div>
+                 <br>
+                 <br>
                  ';
-
-
        	    }
 
-           echo '</ul>';
+           echo '
+           </li>
+           </ul>
+           ';
         }
         ?>
-
-
-
             </div>
-
 
             <h3> Add new product: </h3>
 
@@ -256,3 +260,5 @@ require_once('includes/header.php');
 
             <?php
     require_once('includes/header.php'); ?>
+    </body>
+    </html>

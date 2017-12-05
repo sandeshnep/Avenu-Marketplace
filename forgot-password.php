@@ -13,7 +13,7 @@ require_once('includes/header.php');
 
     <div class="container">
         <br>
-        <form method="POST">
+        <form class="form" method="POST">
             <div class="form-group">
                 <input type="text" name="username" class="form-control" placeholder="Username" required>
             </div>

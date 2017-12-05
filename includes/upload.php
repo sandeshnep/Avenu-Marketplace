@@ -45,11 +45,6 @@
           	}
           }
 
-
-
-
-
-
       $expensions= array("jpeg","jpg","png");
       
      /* if(in_array($file_ext, $expensions)=== false){

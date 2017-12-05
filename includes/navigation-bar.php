@@ -40,7 +40,7 @@
                         <a class="nav-link" href="myproducts.php" title='My Products' alt='My Products'><i class="fa fa-archive" aria-hidden="true"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="navname" href="profile.php"title='My Profile' alt='My Profile'>
+                        <a class="nav-link" id="navname" href="profile.php" title='My Profile' alt='My Profile'>
                             <?php echo $_SESSION['firstname'] ?>
                         </a>
                     </li>

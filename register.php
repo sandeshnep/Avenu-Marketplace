@@ -114,3 +114,6 @@ require_once('includes/header.php');
     </script>
 <?php } ?>
 
+</body>
+</html>
+

@@ -10,6 +10,11 @@ authenticate();
 require_once('includes/header.php');
 ?>
 
+    <div class="jumbotron rounded-0">
+        <h2>Friends</h2>
+        <div class="lead">See your friends profiles</div>
+    </div>
+
 <?php
 
 if (isset($_GET['view'])) {
@@ -29,8 +34,6 @@ if ($view == $username) {
 ?>
 
         <div class="container">
-
-            <h2>Friends</h2>
 
 <?php
 
@@ -62,7 +65,7 @@ for ($j = 0; $j < $num; ++$j) {
   $friends   = false;
 
 if (sizeof($mutual)) {
-    echo "<span class='lead'>$name2 mutual friends</span>\n<ul>\n";
+    echo "<h3>$name2 mutual friends</h3>\n<ul>\n";
     foreach ($mutual as $friend) {
         echo "<li><a href='members.php?view=$friend'>$friend</a>\n";
     }
@@ -71,7 +74,7 @@ if (sizeof($mutual)) {
 }
 
 if (sizeof($followers)) {
-    echo "<span class='lead'>$name2 followers</span>\n<ul>\n";
+    echo "<h3>$name2 followers</h3>\n<ul>\n";
     foreach ($followers as $friend) {
         echo "<li><a href='members.php?view=$friend'>$friend</a>\n";
     }
@@ -80,7 +83,7 @@ if (sizeof($followers)) {
 }
 
 if (sizeof($following)) {
-    echo "<span class='lead'>$name3 following</span>\n<ul>\n";
+    echo "<h3>$name3 following</h3>\n<ul>\n";
     foreach ($following as $friend) {
         echo "<li><a href='members.php?view=$friend'>$friend</a>\n";
     }
@@ -102,3 +105,5 @@ if (!$friends) {
 <?php
 require_once("includes/footer.php");
 ?>
+</body>
+</html>

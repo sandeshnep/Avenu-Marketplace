@@ -18,7 +18,7 @@ require_once('includes/header.php');
 
     <div class="container">
 
-        <form action="" method="post">
+        <form class="form" action="" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required="required" />
@@ -46,3 +46,5 @@ require_once('includes/header.php');
 <?php
 include("includes/footer.php");
 ?>
+</body>
+</html>
