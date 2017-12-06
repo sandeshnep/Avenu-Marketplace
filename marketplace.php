@@ -16,33 +16,37 @@ require_once('includes/header.php');
     </div>
 
     
-    <?php require_once('includes/db.php');
+    <?php 
+    require_once('includes/db.php');
+
     //runs if the UPDATE RATING button is pressed, updates the rating from the logged in user
     $username = $_SESSION['username'];
     if(isset($_POST['rating'])) {
 
         $idreview = $_POST['rating'];
         $ratingval = $_POST['ratingval'];
+          
+        //searching if ratings from that user exists
+        //select avg from the raitngs column
+        $query3 = "SELECT 'rating' FROM `reviews` WHERE authorid='$username' and productid='$idreview'";
+        $result3=mysqli_query($connect, $query3);
+        $row3 = mysqli_num_rows($result3);  
 
+        //rating for that product from the user exists, update it
+        if($row3>0){
 
-        $search = "SELECT `comments` FROM `reviews` WHERE productid='$idreview'";
+             $query21 = "UPDATE `reviews` SET rating ='$ratingval' WHERE productid='$idreview' AND authorid='$username'";
+             $result21=mysqli_query($connect, $query21);
 
-        $searchresult= mysqli_query($connect, $search) or die(mysqli_error());
-        $searchrows = mysqli_num_rows($searchresult);
+        }
+        else{
 
-            //if an entry of comment exists, UPDATE the rating
-            if ($searchrows>0){
-
-                $query7 = "UPDATE `reviews` SET rating = '$ratingval' WHERE productid='$idreview' AND authorid='$username'";
-
-                $result7=mysqli_query($connect, $query7);
-
-            } else {
-                //INSERT rating into the database
-                $query4 = "REPLACE INTO `reviews` (`productid`, `rating`, `authorid`) VALUES ('$idreview', '$ratingval' , '$username')";
-                $result4=mysqli_query($connect, $query4);
+        //INSERT rating into the database
+        $query4 = "REPLACE INTO `reviews` (`productid`, `rating`, `authorid`) VALUES ('$idreview', '$ratingval' , '$username')";
+        $result4=mysqli_query($connect, $query4);
+        }
                 
-            }
+        
         }
         
         //if the post comment is clicked
@@ -50,45 +54,41 @@ require_once('includes/header.php');
             $idcomment = $_POST['postcomment'];
             $commentinput = $_POST['commentinput'];
 
-            $search2 = "SELECT 'rating' FROM `reviews` WHERE productid='$idcomment'";
-            $searchresult= mysqli_query($connect, $search2) or die(mysqli_error());
-            $searchrows = mysqli_num_rows($searchresult);
-            
-            //if an entry of rating exists, UPDATE comment
-            if ($searchrows > 0) {
-                $query8 = "UPDATE `reviews` SET comments = '$commentinput' WHERE productid='$idcomment' AND authorid='$username'";
-                $result8=mysqli_query($connect, $query8);
-               //refresh();
-            } else {
 
-                //INSERT the comment into the database
-                $query6 = "REPLACE INTO `reviews` (`productid`, `comments`, `authorid`) VALUES ('$idcomment', '$commentinput' , '$username')";
-                $result6=mysqli_query($connect, $query6);
-                //refresh();
-            }
+            //INSERT the comment into the database
+            $query6 = "REPLACE INTO `reviews` (`productid`, `comments`, `authorid`) VALUES ('$idcomment', '$commentinput' , '$username')";
+            $result6=mysqli_query($connect, $query6);
+            //refresh();
+            
         }
 
-        if(isset($_POST['username']) && isset($_POST['productid'])){
+        if(isset($_POST['username']) && isset($_POST['productid']) && isset($_POST['uniquecomment'])){
 
             $author = $_POST['username'];
             $productid = $_POST['productid'];
+            $commentv = $_POST['uniquecomment'];
 
             //SQL command to delete a product on to the database
-            $query2 = "DELETE FROM `reviews` WHERE productid='$productid' AND authorid='$author'";
+
+            $query2 = "UPDATE `reviews` SET comments = NULL WHERE productid='$productid' AND authorid='$author' AND comments='$commentv'";
+            //"DELETE FROM `reviews` WHERE productid='$productid' AND authorid='$author'";
             $result2 = mysqli_query($connect, $query2);
 
-        }
+      }
 
          ?>
 
 
 
-    <div id = "container" class="container">
-        <div id="refreshajax">
+
         <?php 
         require_once('includes/db.php');
         if(isset($_SESSION['username'])){
             $username2 = $_SESSION['username'];
+
+
+            echo' <div id = "container" class="container">
+        <div id="refreshajax">';
 
             $query = "SELECT * FROM `products`";
             $result = mysqli_query($connect, $query) or die(mysqli_error());
@@ -165,7 +165,7 @@ require_once('includes/header.php');
                         if(isset($row5["comments"]) && $row5["authorid"] == $username2) {
                             echo'
                             
-                            <br>•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span> &nbsp;<button class="btn btn-sm btn-danger" name="delete_comment" username="' . $row5["authorid"] . '" productid="'.$row["productid"].'"> Delete </button>';
+                            <br><br>•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span> &nbsp;<button class="btn btn-sm btn-danger" name="delete_comment" username="' . $row5["authorid"] . '" productid="'.$row["productid"].'" uniquecomment="' . $row5["comments"] . '"> Delete </button>';
                         }
                         else{
                         if(isset($row5["comments"])) {
@@ -259,13 +259,14 @@ require_once('includes/header.php');
        
        var usernamev = $(this).attr("username");
        var prodid = $(this).attr("productid");
+       var commentv= $(this).attr("uniquecomment");
 
 
     $.ajax({
          url: "marketplace.php",
          method: "POST",
          dataType: "html",
-         data: {username: usernamev, productid: prodid},
+         data: {username: usernamev, productid: prodid, uniquecomment: commentv},
         
          success: function (response) {
            //alert(response);
