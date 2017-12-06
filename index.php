@@ -20,7 +20,7 @@ require_once('includes/header.php');
             <?php 
             if(!isset($_SESSION["username"])) {
                 echo '<h1>Welcome to Avenu</h1>
-                <p class="text-lead">Login to begin buying and selling.</p>
+                <p class="lead">Login to begin buying and selling.</p>
                 <a class="btn btn-info" href="login.php">Login</a>
                 <a class="btn btn-dark" href="register.php">Register</a>';
             }

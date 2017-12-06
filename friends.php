@@ -67,7 +67,7 @@ for ($j = 0; $j < $num; ++$j) {
 if (sizeof($mutual)) {
     echo "<h3>$name2 mutual friends</h3>\n<ul>\n";
     foreach ($mutual as $friend) {
-        echo "<li><a href='members.php?view=$friend'>$friend</a>\n";
+        echo "<li><i class='fa fa-caret-right' aria-hidden='true'></i><a class='lead' href='members.php?view=$friend'>$friend</a>\n";
     }
     echo "</ul>\n";
     $friends = true;
@@ -76,7 +76,7 @@ if (sizeof($mutual)) {
 if (sizeof($followers)) {
     echo "<h3>$name2 followers</h3>\n<ul>\n";
     foreach ($followers as $friend) {
-        echo "<li><a href='members.php?view=$friend'>$friend</a>\n";
+        echo "<li><i class='fa fa-caret-right' aria-hidden='true'></i><a class='lead' href='members.php?view=$friend'>$friend</a>\n";
     }
     echo "</ul>\n";
     $friends = true;
@@ -85,17 +85,17 @@ if (sizeof($followers)) {
 if (sizeof($following)) {
     echo "<h3>$name3 following</h3>\n<ul>\n";
     foreach ($following as $friend) {
-        echo "<li><a href='members.php?view=$friend'>$friend</a>\n";
+        echo "<li><i class='fa fa-caret-right' aria-hidden='true'></i><a class='lead' href='members.php?view=$friend'>$friend</a>\n";
     }
     echo "</ul>\n";
     $friends = true;
 }
 
 if (!$friends) {
-    echo "<p class='lead'>You don't have any friends yet.</p>\n<br>\n";
+    echo "<h3>You don't have any friends yet.</h3>\n<br>\n";
 }
 
-  echo "<a class='btn btn-info' href='messages.php?view=$view'>" .
+  echo "<a class='lead' class='btn btn-info' href='messages.php?view=$view'>" .
        "View $name2 messages</a>\n<br>\n";
 ?>
                 <br>
