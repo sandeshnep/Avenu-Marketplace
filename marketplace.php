@@ -16,8 +16,9 @@ require_once('includes/header.php');
     </div>
 
     
-    <?php
+    <?php require_once('includes/db.php');
     //runs if the UPDATE RATING button is pressed, updates the rating from the logged in user
+    $username = $_SESSION['username'];
     if(isset($_POST['rating'])) {
 
         $idreview = $_POST['rating'];
@@ -32,22 +33,19 @@ require_once('includes/header.php');
             //if an entry of comment exists, UPDATE the rating
             if ($searchrows>0){
 
-
                 $query7 = "UPDATE `reviews` SET rating = '$ratingval' WHERE productid='$idreview' AND authorid='$username'";
 
                 $result7=mysqli_query($connect, $query7);
-               // refresh();
 
             } else {
                 //INSERT rating into the database
                 $query4 = "REPLACE INTO `reviews` (`productid`, `rating`, `authorid`) VALUES ('$idreview', '$ratingval' , '$username')";
                 $result4=mysqli_query($connect, $query4);
-                //refresh();
+                
             }
         }
-        ?>
-
-        <?php //if the post comment is clicked
+        
+        //if the post comment is clicked
         if(isset($_POST['postcomment'])) {
             $idcomment = $_POST['postcomment'];
             $commentinput = $_POST['commentinput'];
@@ -68,7 +66,20 @@ require_once('includes/header.php');
                 $result6=mysqli_query($connect, $query6);
                 //refresh();
             }
-        }?>
+        }
+
+        if(isset($_POST['username']) && isset($_POST['productid'])){
+
+            $author = $_POST['username'];
+            $productid = $_POST['productid'];
+
+            //SQL command to delete a product on to the database
+            $query2 = "DELETE FROM `reviews` WHERE productid='$productid' AND authorid='$author'";
+            $result2 = mysqli_query($connect, $query2);
+
+        }
+
+         ?>
 
 
 
@@ -77,7 +88,7 @@ require_once('includes/header.php');
         <?php 
         require_once('includes/db.php');
         if(isset($_SESSION['username'])){
-            $username = $_SESSION['username'];
+            $username2 = $_SESSION['username'];
 
             $query = "SELECT * FROM `products`";
             $result = mysqli_query($connect, $query) or die(mysqli_error());
@@ -117,12 +128,12 @@ require_once('includes/header.php');
                     
                     echo
                     '<ul>' .
-                    '<li><b>Username: </b>' . $row['username'] . '</li>' . "\r\n" . 
                     '<li><b>Date Posted: </b>' . $row['timesql'] . '</li>' . "\r\n" .
+                    '<li><b>Seller: </b>' . $row['username'] . '</li>' . "\r\n" . 
                     '<li><b>Description: </b>' . $row['description'] . '</li>' . "\r\n" .
                     '<li><b>Average Rating: </b>' . $row3['avg_rating'] . '</li>' . "\r\n" . 
-                    '</ul>' . 
-                    '<br><b>Pictures: </b><br> ';
+                    '</ul>' 
+                    ;
                     
                     echo'
                     <br><b>Your Rating: </b>
@@ -151,10 +162,16 @@ require_once('includes/header.php');
                     $rows5 = mysqli_num_rows($result5);
                     
                     while($row5 = mysqli_fetch_array($result5, MYSQLI_ASSOC)) {
+                        if(isset($row5["comments"]) && $row5["authorid"] == $username2) {
+                            echo'
+                            
+                            <br>•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span> &nbsp;<button class="btn btn-sm btn-danger" name="delete_comment" username="' . $row5["authorid"] . '" productid="'.$row["productid"].'"> Delete </button>';
+                        }
+                        else{
                         if(isset($row5["comments"])) {
                             echo'
                             <br>•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span>';
-                        }
+                        }}
                     }
 
 
@@ -191,6 +208,7 @@ require_once('includes/header.php');
         e.preventDefault();
         var commentinputv = $(this).find('input').val();
         var postcommentv = e.target.id;
+        //alert(postcommentv);
 
 
     $.ajax({
@@ -212,7 +230,7 @@ require_once('includes/header.php');
 
 
 
-//ajax for adding comments items
+    //ajax for adding rating items
     $("body").on("submit", ".form_rating", function (e) {
         e.preventDefault();
         var ratingvalv = $(this).find('select').val();
@@ -235,6 +253,28 @@ require_once('includes/header.php');
 
     });
     
+
+    //ajax for deleting comment
+    $("body").on("click", ".btn.btn-sm", function (e) {
+       
+       var usernamev = $(this).attr("username");
+       var prodid = $(this).attr("productid");
+
+
+    $.ajax({
+         url: "marketplace.php",
+         method: "POST",
+         dataType: "html",
+         data: {username: usernamev, productid: prodid},
+        
+         success: function (response) {
+           //alert(response);
+           $result = $(response).find("#refreshajax");
+           $(document).find('#refreshajax').html($result);
+        }
+        })
+
+    });
 
 
 
