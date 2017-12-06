@@ -77,3 +77,22 @@ ul{
     float: right;
     clear: both;
 }
+
+.img-container {
+    position: relative;
+    display: inline-block; /* added */
+    overflow: hidden; /* added */
+    margin: 0.25em;
+}
+
+.img-container a {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.6;
+}
+
+.img-container a:hover {
+    opacity: 1;
+}

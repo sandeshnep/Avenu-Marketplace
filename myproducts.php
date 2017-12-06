@@ -147,14 +147,14 @@ require_once('includes/header.php');
                    <br>';
                    
                    if(isset($row['img1'])){
-                       echo'<img src="'.$row['img1'].'" height="200" width="200"> <img style="vertical-align:top" src="img/close_red.png" width="25" height="25" deleteimgid="'.$row['productid'].'" imgnum="img1" class="deleteicon">';
+                       echo'<div class="img-container"><img src="'.$row['img1'].'" height="200" width="200"><a deleteimgid="'.$row['productid'].'" imgnum="img1" class="deleteicon text-danger"><i class="fa fa-times-circle" style="position:absolute; top:0; right:0;" aria-hidden="true"></i></a></div>';
                       }
         
                   if(isset($row['img2'])){
-                      echo'<img src="'.$row['img2'].'" height="200" width="200"> <img style="vertical-align:top" src="img/close_red.png" width ="25" height="25" deleteimgid="'.$row['productid'].'" imgnum="img2" class="deleteicon">';
+                      echo'<div class="img-container"><img src="'.$row['img2'].'" height="200" width="200"><a deleteimgid="'.$row['productid'].'" imgnum="img2" class="deleteicon text-danger"><i class="fa fa-times-circle" style="position:absolute; top:0; right:0;" aria-hidden="true"></i></a></div>';
                   }
                   if(isset($row['img3'])){
-                      echo'<img src="'.$row['img3'].'" height="200" width="200"> <img style="vertical-align:top" src="img/close_red.png" width ="25" height="25" deleteimgid="'.$row['productid'].'" imgnum="img3" class="deleteicon">';
+                      echo'<div class="img-container"><img src="'.$row['img3'].'" height="200" width="200"><a deleteimgid="'.$row['productid'].'" imgnum="img3" class="deleteicon text-danger"><i class="fa fa-times-circle" style="position:absolute; top:0; right:0;" aria-hidden="true"></i></a></div>';
                   }
                   echo'
                   <br>' .
