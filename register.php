@@ -45,10 +45,9 @@ require_once('includes/header.php');
         } else {
         ?>
 
-        <h2>Register for an account</h2>
-        <br>
-
-        <form action="" method="POST" name="registration">
+        <form class="form bg-light" action="" method="POST" name="registration">
+            <h2>Register for an account</h2>
+            <br>
             <div class="row">
             <div class="col">
             <div class="form-group">
@@ -65,12 +64,18 @@ require_once('includes/header.php');
             </div>
             <div class="form-group">
                 <label for="username">User Name</label>
+                <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                 <input type="text" class="form-control" name="username" id="username" placeholder="Enter desired username">
+                </div>
                 <span id="usernameResult"></span>
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
+                <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                 <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter your email address">
+                </div>
                 <small id="emailHelp" class="form-text text-muted">We won't share your email with anyone.</small>
             </div>
             <div class="form-group">

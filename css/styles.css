@@ -63,6 +63,10 @@ ul{
     list-style-type: none; 
 }
 
+.fa {
+    size: 1.5em;
+}
+
 /* .erase {
     float: right;
 } */

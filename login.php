@@ -48,18 +48,23 @@ require_once('includes/header.php');
         }
     } else {
         ?>
-
+    
+    <form class="form bg-light" action="" method="post" name="login">
     <h2>Login to your account</h2>
     <br>
-    
-    <form class="form" action="" method="post" name="login">
     <div class="form-group">
-        <label for="username">User Name</label>
+    <label for="username">User Name</label>
+        <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
         <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username">
+        </div>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
+        <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-unlock" aria-hidden="true"></i></span>
         <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+        </div>
     </div>
     <div class="form-group">
         <input type="checkbox" name="remember" id="remember">

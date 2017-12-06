@@ -56,8 +56,29 @@ require_once('includes/header.php');
 
         ?>
 
-            <h3> Your Products: </h3>
+            <form class="form bg-light" id="add-item-form">
+                <h3> Add new product: </h3>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="productname">Product Name</label>
+                            <input type="text" class="form-control" name="productname" id="productname" placeholder="Enter Product Name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="description">Product Description</label>
+                            <input type="text" class="form-control" name="description" id="description" placeholder="Enter product description">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="insert" name="submit" class="btn btn-info">Add Product</button>
+            </form>
+
             <br>
+            <br>
+
+            <h3> Your Current Products: </h3>
             <br>
 
             <div id="refreshajax">
@@ -137,7 +158,7 @@ require_once('includes/header.php');
                  <!----UPLOAD IMAGE HTML FORM !-->
                  <br>
                  <h4 class="lead">Upload image for this item</h4>
-                 <form action ="includes/upload.php" method = "POST" enctype = "multipart/form-data" class="upload">
+                 <form action="includes/upload.php" method="POST" enctype="multipart/form-data" class="upload">
                  <input type = "file" name ="image" class = "image" attribute ="'.$currentprodid.'"/>
                  <button type="submit" class="uploadsubmit btn btn-info">Upload</button>
                  <input type="hidden" name="idproductimg" value="'.$currentprodid.'">
@@ -160,29 +181,6 @@ require_once('includes/header.php');
         }
         ?>
             </div>
-
-            <h3> Add new product: </h3>
-
-            <form id="add-item-form">
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="productname">Product Name</label>
-                            <input type="text" class="form-control" name="productname" id="productname" placeholder="Enter Product Name">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="description">Product Description</label>
-                            <input type="text" class="form-control" name="description" id="description" placeholder="Enter product description">
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" id="insert" name="submit" class="btn btn-info">Add Product</button>
-            </form>
-
-
 
             <script>
                 //------------------------ajax for deleting items
@@ -256,9 +254,7 @@ require_once('includes/header.php');
                 });
             </script>
 
-
-
-            <?php
-    require_once('includes/header.php'); ?>
+    <?php
+    require_once('includes/footer.php'); ?>
     </body>
     </html>

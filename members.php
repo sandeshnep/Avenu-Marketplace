@@ -51,15 +51,15 @@ if (isset($_GET['add'])) {
 $result = queryMysql("SELECT username FROM users ORDER BY username");
 $num    = $result->num_rows;
 
-echo "<h3>Other Members</h3><ul>";
+echo "<h3>Other Members</h3><ul><br>";
 
-for ($j = 0; $j < $num; ++$j) {
+for ($j = 0; $j < $num; $j++) {
     $row = $result->fetch_array(MYSQLI_ASSOC);
     if ($row['username'] == $username) {
         continue;
     }
     
-    echo "<li><a href='members.php?view=" .
+    echo "<li><div><i class='fa fa-caret-right' aria-hidden='true'></i> <a class='lead' href='members.php?view=" .
     $row['username'] . "'>" . $row['username'] . "</a>";
     $follow = "follow";
 
@@ -71,18 +71,18 @@ for ($j = 0; $j < $num; ++$j) {
     $t2      = $result1->num_rows;
 
     if (($t1 + $t2) > 1) {
-        echo " &harr; is a mutual friend";
+        echo " <span class='lead'><i class='fa fa-arrows-h' aria-hidden='true'></i> is a mutual friend</span>";
     } elseif ($t1) {
-        echo " &larr; Already following";
+        echo " <span class='lead'><i class='fa fa-long-arrow-left' aria-hidden='true'></i> Already following</span>";
     } elseif ($t2) {
-        echo " &rarr; is following you";
+        echo " <span class='lead'><i class='fa fa-long-arrow-right' aria-hidden='true'></i> is following you</span>";
         $follow = "follow back";
     }
     
     if (!$t1) {
-        echo " [<a href='members.php?add="   .$row['username'] . "'>$follow</a>]";
+        echo " [<a href='members.php?add="   .$row['username'] . "'>$follow</a>]</div></li><br>";
     } else {
-        echo " [<a href='members.php?remove=".$row['username'] . "'>drop</a>]";
+        echo " [<a href='members.php?remove=".$row['username'] . "'><i class='fa fa-times text-danger' aria-hidden='true'></i></a>]</div></li><br>";
     }
 }
 ?>

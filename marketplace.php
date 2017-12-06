@@ -91,7 +91,7 @@ require_once('includes/header.php');
                     
                     echo
                     '<ul>' .
-                    '<li><b>Username: </b>' . $row2['username'] . '</li>' . "\r\n" . 
+                    '<li><b>Username: </b>' . '<a href="members.php?view="'.$row2['username'].'">'.$row2['username'].'</a></li>' . "\r\n" . 
                     '<li><b>Date Posted: </b>' . $row2['timesql'] . '</li>' . "\r\n" .
                     '<li><b>Description: </b>' . $row2['description'] . '</li>' . "\r\n" .
                     '<li><b>Average Rating: </b>' . $row3['avg_rating'] . '</li>' . "\r\n" . 
