@@ -42,7 +42,7 @@ if ($view != "") {
     echo <<<_END
     <form method='post' action='messages.php?view=$view'>
     <p class='lead'>Type here to leave a message:</p>
-    <textarea name='text' cols='50' rows='5'></textarea><br>
+    <textarea class='col-9' name='text' rows='5'></textarea><br>
     <input type='radio' name='pm' value='0' id='public' checked='checked'><label for='public'>Public</label>
     <input type='radio' name='pm' value='1' id='private'><label for='private'>Private</label><br>
     <input type='submit' value='Post Message' class='btn btn-info'></form><br>
@@ -60,7 +60,7 @@ $num    = $result->num_rows;
 for ($j = 0; $j < $num; $j++) {
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
-    echo"<div class='messages'>";
+    echo"<div class='messages col-9 mt-1'>";
 
     if ($row['pm'] == 0 || $row['auth'] == $username || $row['recip'] == $username) {
         echo "<span class='text-muted small'>" . date('M jS \'y g:ia:', $row['time']) . "</span>";
@@ -74,8 +74,8 @@ for ($j = 0; $j < $num; $j++) {
         }
 
         if ($row['recip'] == $username) {
-            echo "<a class='erase' href='messages.php?view=$view" .
-            "&erase=" . $row['id'] . "'>[erase]</a>\n";
+            echo "<a class='text-danger' href='messages.php?view=$view" .
+            "&erase=" . $row['id'] . "'>[delete]</a>\n";
         }
         echo "</div>\n";
         }

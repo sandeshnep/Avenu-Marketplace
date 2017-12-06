@@ -95,8 +95,8 @@ if (!$friends) {
     echo "<h3>You don't have any friends yet.</h3>\n<br>\n";
 }
 
-  echo "<a class='lead' class='btn btn-info' href='messages.php?view=$view'>" .
-       "View $name2 messages</a>\n<br>\n";
+  echo "<br><a class='lead btn btn-info' href='messages.php?view=$view'>" .
+       "<i class='fa fa-envelope' aria-hidden='true'></i> View $name2 messages</a>\n<br>\n";
 ?>
                 <br>
                 <br>

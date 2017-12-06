@@ -49,9 +49,13 @@ function showProfile($username) {
     
     if ($result->num_rows) {
         $row = $result->fetch_array(MYSQLI_ASSOC);
-        echo stripslashes($row['firstname']) . " " . stripslashes($row['lastname']) .
+        echo 
+        "Name: " .
+        stripslashes($row['firstname']) . " " . stripslashes($row['lastname']) .
         "<br>" .
         "Username: " . stripslashes($row['username']) .
+        "<br>" .
+        "email: " . stripslashes($row['email']) .
         "<br style='clear:left;'><br>";
     }
 }

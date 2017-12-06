@@ -29,10 +29,13 @@ if (isset($_GET['view'])) {
     } else {
         $name = "$view's";
     }
-    echo "<h3>$name Profile</h3>";
+    echo "<div class='card w-50'><div class='card-header'>" . 
+    "<h3>$name Profile</h3></div><div class='card-block container'>";
     showProfile($view);
-    echo "<a class='button' href='messages.php?view=$view'>".
-        "View $name messages</a><br><br>";
+    echo "<br><a class='btn btn-info' href='messages.php?view=$view'>" .
+    "<i class='fa fa-envelope' aria-hidden='true'></i>" . 
+    "View $name messages</a>" . 
+    "<br><br></div></div>";
     die("</div></body></html>");
 }
 

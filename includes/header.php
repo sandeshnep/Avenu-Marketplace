@@ -5,7 +5,7 @@ if (!isset($_SESSION)) {
 
 $appname = "AVENU";
 
-require_once 'functions.php';
+require_once("functions.php");
 
 echo "<!DOCTYPE html>\n<html>\n<head>\n";
 

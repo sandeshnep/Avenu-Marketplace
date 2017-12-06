@@ -111,9 +111,11 @@ require_once('includes/header.php');
                 if(isset($row['productid'])) {
                     echo '
                     <div class="card">' . "\r\n" .
-                    '<div class="card-body">' . "\r\n" .
-                    '<h4 class="card-title">' . $row['name'] . '</h4>' . "\r\n" .
-                    '<hr>' . "\r\n";
+                    '<div class="card-header">' . "\r\n" .
+                    '<h4 class="item-name card-title">' . $row['name'] . '</h4>' . "\r\n" .
+                    '<a class="pull-right btn btn-info" href="messages.php?view='.$row['username'].'">Contact seller</a>' .
+                    '</div>' . "\r\n" .
+                    '<div class="card-body">';
                     
                     if(isset($row['img1'])) {
                         echo'<img src="'.$row['img1'].'" height="200" width="200">'. "\r\n";
@@ -164,8 +166,7 @@ require_once('includes/header.php');
                     while($row5 = mysqli_fetch_array($result5, MYSQLI_ASSOC)) {
                         if(isset($row5["comments"]) && $row5["authorid"] == $username2) {
                             echo'
-                            
-                            <br><br>•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span> &nbsp;<button class="btn btn-sm btn-danger" name="delete_comment" username="' . $row5["authorid"] . '" productid="'.$row["productid"].'" uniquecomment="' . $row5["comments"] . '"> Delete </button>';
+                            <br><span class="pt-1">•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span> &nbsp;<button class="btn btn-sm btn-danger" name="delete_comment" username="' . $row5["authorid"] . '" productid="'.$row["productid"].'" uniquecomment="' . $row5["comments"] . '"> Delete </button></span>';
                         }
                         else{
                         if(isset($row5["comments"])) {
@@ -178,11 +179,9 @@ require_once('includes/header.php');
                     echo '
                     <!-- form for adding a comment !-->
                     <br> <br> <b> Add Comment: </b>
-                    <form id = "' . $row['productid'].'" name = "comment" method = "POST" class="form_comment">
-                    <input name="commentinput" type = "text">
-                    <br>
-                    <br>
-                    <button type="submit" name="postcomment" value = "' . $row['productid'].'" class="btn btn-info">Post Comment</button>
+                    <form id = "' . $row['productid'].'" name="comment" method="POST" class="form_comment form-inline">
+                    <input name="commentinput" type="text">
+                    <button type="submit" name="postcomment" value = "' . $row['productid'].'" class="btn btn-info ml-3">Post Comment</button>
                     </form>
                     <br>
                     '; 
@@ -196,7 +195,7 @@ require_once('includes/header.php');
         }
         ?>
     </div>
-
+    
     </div>
 
 

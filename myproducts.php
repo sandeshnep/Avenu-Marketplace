@@ -106,14 +106,14 @@ require_once('includes/header.php');
                    echo '
                    <li> 
                    <div class="card">' .
-                   '<div class="card-body">' .
+                   '<div class="card-header">' .
                    '<h4 class="card-title">' . $row['name'] . '</h4>' .
-                   '<hr>
-                   ';
+                   '</div>' .
+                   '<div class="card-body">'
+                   ;
 
                    echo'
-                   <br>
-                   <div class="product-image">';
+                   <br>';
                    
                    if(isset($row['img1'])){
                        echo'<img src="'.$row['img1'].'" height="200" width="200">';
@@ -126,9 +126,7 @@ require_once('includes/header.php');
                       echo'<img src="'.$row['img3'].'" height="200" width="200">';
                   }
                   echo'
-                  </div>
-                  <br>
-                  ' .
+                  <br>' .
 
                    '<b>Product ID : </b> ' . $row['productid'] . 
                    '<br><b>Description: </b>' . $row['description']  . 
@@ -158,8 +156,8 @@ require_once('includes/header.php');
                  <!----UPLOAD IMAGE HTML FORM !-->
                  <br>
                  <h4 class="lead">Upload image for this item</h4>
-                 <form action="includes/upload.php" method="POST" enctype="multipart/form-data" class="upload">
-                 <input type = "file" name ="image" class = "image" attribute ="'.$currentprodid.'"/>
+                 <form action="includes/upload.php" method="POST" enctype="multipart/form-data" class="upload form-inline">
+                 <input type = "file" name ="image" class = "image form-control-file" attribute ="'.$currentprodid.'"/>
                  <button type="submit" class="uploadsubmit btn btn-info">Upload</button>
                  <input type="hidden" name="idproductimg" value="'.$currentprodid.'">
                  </form>
