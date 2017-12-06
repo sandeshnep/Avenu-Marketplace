@@ -42,19 +42,50 @@ require_once('includes/header.php');
 
 		} 
 
-        //DELETION-------------------------------------------------------
-        if(isset($_POST['delete']) and is_numeric($_POST['delete'])){
+    //DELETION-------------------------------------------------------
+    if(isset($_POST['delete']) and is_numeric($_POST['delete'])){
 
-        //gets the value of the productid to be deleted from the form (check the <button></button> tag attributes)
-        $iddelete = $_POST['delete'];
+    //gets the value of the productid to be deleted from the form (check the <button></button> tag attributes)
+    $iddelete = $_POST['delete'];
 
-        //SQL command to delete a product on to the database
-        $query2 = "DELETE FROM `products` WHERE productid='$iddelete'";
+    //SQL command to delete a product on to the database
+    $query2 = "DELETE FROM `products` WHERE productid='$iddelete'";
+    $result2 = mysqli_query($connect, $query2);
+
+    }
+
+    //DELETE PICTURES-----------------------------------------------
+    if(isset($_POST['deleteimgid'])&& isset($_POST['imgnum'])){
+      $iddelete = $_POST['deleteimgid'];
+      $imgnum = $_POST['imgnum'];
+
+      if($imgnum=="img1"){
+
+        $query2 = "UPDATE `products` SET img1 = NULL WHERE productid='$iddelete'";
+        //"DELETE FROM `reviews` WHERE productid='$productid' AND authorid='$author'";
         $result2 = mysqli_query($connect, $query2);
+      }
+      else
+        if($imgnum=="img2"){
 
-        }
+        $query2 = "UPDATE `products` SET img2 = NULL WHERE productid='$iddelete'";
+        //"DELETE FROM `reviews` WHERE productid='$productid' AND authorid='$author'";
+        $result2 = mysqli_query($connect, $query2);
+      }
+      else
+        if($imgnum=="img3"){
 
-        ?>
+        $query2 = "UPDATE `products` SET img3 = NULL WHERE productid='$iddelete'";
+        //"DELETE FROM `reviews` WHERE productid='$productid' AND authorid='$author'";
+        $result2 = mysqli_query($connect, $query2);
+      }
+
+    }
+
+
+
+
+  ?>
 
             <form class="form bg-light" id="add-item-form">
                 <h3> Add new product: </h3>
@@ -116,14 +147,14 @@ require_once('includes/header.php');
                    <br>';
                    
                    if(isset($row['img1'])){
-                       echo'<img src="'.$row['img1'].'" height="200" width="200">';
+                       echo'<img src="'.$row['img1'].'" height="200" width="200"> <img style="vertical-align:top" src="img/close_red.png" width="25" height="25" deleteimgid="'.$row['productid'].'" imgnum="img1" class="deleteicon">';
                       }
         
                   if(isset($row['img2'])){
-                      echo'<img src="'.$row['img2'].'" height="200" width="200">';
+                      echo'<img src="'.$row['img2'].'" height="200" width="200"> <img style="vertical-align:top" src="img/close_red.png" width ="25" height="25" deleteimgid="'.$row['productid'].'" imgnum="img2" class="deleteicon">';
                   }
                   if(isset($row['img3'])){
-                      echo'<img src="'.$row['img3'].'" height="200" width="200">';
+                      echo'<img src="'.$row['img3'].'" height="200" width="200"> <img style="vertical-align:top" src="img/close_red.png" width ="25" height="25" deleteimgid="'.$row['productid'].'" imgnum="img3" class="deleteicon">';
                   }
                   echo'
                   <br>' .
@@ -180,76 +211,103 @@ require_once('includes/header.php');
         ?>
             </div>
 
-            <script>
-                //------------------------ajax for deleting items
-                $("body").on('click', '.btn.btn-danger', function (e) {
+      <script>
+
+
+          //------------------------ajax for deleting items
+          $("body").on('click', '.btn.btn-danger', function (e) {
 
 
 
-                    $.ajax({
-                        url: "myproducts.php",
-                        method: "POST",
-                        dataType: "html",
-                        data: {
-                            delete: e.target.id
-                        },
+              $.ajax({
+                  url: "myproducts.php",
+                  method: "POST",
+                  dataType: "html",
+                  data: {
+                      delete: e.target.id
+                  },
 
-                        success: function (response, textStauts, jqXHR) {
+                  success: function (response, textStauts, jqXHR) {
 
-                            $result = $(response).find("#refreshajax");
-                            $("#refreshajax").html($result);
+                      $result = $(response).find("#refreshajax");
+                      $("#refreshajax").html($result);
 
-                        }
-                    })
+                  }
+              })
 
-                });
-
-
-                //-----------------------ajax for uploading pictures
-                $("body").on("submit", ".upload", function (e) {
-
-                    e.preventDefault();
-
-                    //if an image is selected, run ajax
-                    if ($(this).children('input')[0].files.length > 0) {
-
-                        $.ajax({
-                            type: "POST",
-                            url: "includes/upload.php",
-                            data: new FormData(this),
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            success: function (response, textStatus, jqXHR) {
-                                $result = $(response).find("#refreshajax");
-                                $("#refreshajax").html($result);
-                            }
-                        })
-                    }
-                });
+          });
 
 
+          //-----------------------ajax for uploading pictures
+          $("body").on("submit", ".upload", function (e) {
+
+              e.preventDefault();
+
+              //if an image is selected, run ajax
+              if ($(this).children('input')[0].files.length > 0) {
+
+                  $.ajax({
+                      type: "POST",
+                      url: "includes/upload.php",
+                      data: new FormData(this),
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+                      success: function (response, textStatus, jqXHR) {
+                          $result = $(response).find("#refreshajax");
+                          $("#refreshajax").html($result);
+                      }
+                  })
+              }
+          });
 
 
 
-                //---------------------------ajax for adding items
-                $('#add-item-form').on("submit", function (event) {
 
-                    event.preventDefault(); //prevents refresh
+          //---------------------------ajax for adding items
+          $('#add-item-form').on("submit", function (event) {
 
-                    $.ajax({
-                        url: "myproducts.php",
-                        method: "POST",
-                        dataType: 'html',
-                        data: $('#add-item-form').serialize(),
+              event.preventDefault(); //prevents refresh
 
-                        success: function (response, textStauts, jqXHR) {
-                            $result = $(response).find('#refreshajax');
-                            $('#refreshajax').html($result);
+              $.ajax({
+                  url: "myproducts.php",
+                  method: "POST",
+                  dataType: 'html',
+                  data: $('#add-item-form').serialize(),
 
-                        }
-                    })
-                });
+                  success: function (response, textStauts, jqXHR) {
+                      $result = $(response).find('#refreshajax');
+                      $('#refreshajax').html($result);
+
+                  }
+              })
+          });
+
+
+          //ajax for deleting images
+          $("body").on("click", ".deleteicon", function (e) {
+             
+             var prodid = $(this).attr("deleteimgid");
+             var imgnumv= $(this).attr("imgnum");
+             //alert(prodid);
+
+
+          $.ajax({
+               url: "myproducts.php",
+               method: "POST",
+               dataType: "html",
+               data: {deleteimgid: prodid, imgnum: imgnumv},
+              
+               success: function (response) {
+                 //alert(response);
+                 $result = $(response).find("#refreshajax");
+                 $(document).find('#refreshajax').html($result);
+              }
+              })
+
+          });
+
+
             </script>
 
     <?php
