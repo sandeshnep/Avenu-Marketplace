@@ -90,11 +90,6 @@ ul{
     position: absolute;
     top: 0;
     right: 0;
-    opacity: 0.6;
-}
-
-.img-container a:hover {
-    opacity: 1;
 }
 
 .why p {

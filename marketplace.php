@@ -73,13 +73,8 @@ require_once('includes/header.php');
             $query2 = "UPDATE `reviews` SET comments = NULL WHERE productid='$productid' AND authorid='$author' AND comments='$commentv'";
             //"DELETE FROM `reviews` WHERE productid='$productid' AND authorid='$author'";
             $result2 = mysqli_query($connect, $query2);
-
       }
-
          ?>
-
-
-
 
         <?php 
         require_once('includes/db.php');
@@ -87,19 +82,25 @@ require_once('includes/header.php');
             $username2 = $_SESSION['username'];
 
 
-            echo' <div id = "container" class="container">
-        <div id="refreshajax">';
+            echo' 
+            <div id = "container" class="container">
+            <div id="refreshajax">';
 
             $query = "SELECT * FROM `products`";
             $result = mysqli_query($connect, $query) or die(mysqli_error());
             $rows = mysqli_num_rows($result);
-           
-             while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+
+            $items = 0;
+            
+            while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                 echo'<br><br>';
+                $items++;
+
+                if ($items % 2 != 0) {
+                    echo '<div class="row">';
+                }
 
                 $currentprodid= $row['productid'];
-                
-
 
                 //pulling the ratings from the reviews table
                 //select avg from the raitngs column
@@ -110,7 +111,8 @@ require_once('includes/header.php');
                 
                 if(isset($row['productid'])) {
                     echo '
-                    <div class="card">' . "\r\n" .
+                    <div class="card-container col-md-6 col-sm-12">' . "\r\n" .
+                    '<div class="card">' . "\r\n" .
                     '<div class="card-header">' . "\r\n" .
                     '<h4 class="item-name card-title">' . $row['name'] . '</h4>' . "\r\n" .
                     '<a class="pull-right btn btn-info" href="messages.php?view='.$row['username'].'">Contact seller</a>' .
@@ -189,8 +191,12 @@ require_once('includes/header.php');
                 echo '
                 </div>
                 </div>
+                </div>
                 <br>
                 <br>';
+                if ($items % 2 == 0) {
+                    echo '</div>';
+                }
             }
         }
         ?>
