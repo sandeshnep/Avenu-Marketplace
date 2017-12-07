@@ -11,9 +11,7 @@ require_once('includes/header.php');
 ?>
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
-    <div class="jumbotron rounded-0">
-        <h2>Common Marketplace</h2>
-    </div>
+    
 
     
     <?php 
@@ -131,16 +129,14 @@ require_once('includes/header.php');
                     ;
                     
                     echo
-                    '<ul>' .
-                    '<li><b>Date Posted: </b>' . $row['timesql'] . '</li>' . "\r\n" .
-                    '<li><b>Seller: </b>' . $row['username'] . '</li>' . "\r\n" . 
-                    '<li><b>Description: </b>' . $row['description'] . '</li>' . "\r\n" .
-                    '<li><b>Average Rating: </b>' . $row3['avg_rating'] . '</li>' . "\r\n" . 
-                    '</ul>' 
+                    '<br><br><span >Posted: </span>' . $row['timesql'] . "\r\n" .
+                    '<br><span >SellerId: </span>' . $row['username'] . "\r\n" . 
+                    '<br><span >Description: </span>' . $row['description'] ."\r\n" .
+                    '<br><span >Average Rating: </span>' . $row3['avg_rating'] . "\r\n" 
                     ;
                     
                     echo'
-                    <br><b>Your Rating: </b>
+                    <br><br><span >Your Rating: </span>
                     <!-- UPDATE RATINGS - MOVE TO COMMON MARKET!--> 
                     <form method="POST" class="form_rating">
                     <select name = "ratingval">
@@ -152,13 +148,12 @@ require_once('includes/header.php');
                     </select>
                     ' .
                     '
-                    <button type="submit" name="rating" method ="POST" value="' . $row['productid'] .'" class="btn btn-info">Update Rating</button>
+                    <button type="submit" name="rating" method ="POST" value="' . $row['productid'] .'" class="btn btn-default btn-link">Rate</button>
                     </form>
                     <!-- UPDATE RATINGS - MOVE TO COMMON MARKET END!-->
-                    <br>
-                    
+                    <br>                  
 
-                    <b>Comments :</b> ';
+                    <span >Comments : </span>';
                     
                     //SQL commands for pulling comments from reviews table
                     $query5 = "SELECT * FROM `reviews` WHERE productid='$currentprodid'";
@@ -168,7 +163,7 @@ require_once('includes/header.php');
                     while($row5 = mysqli_fetch_array($result5, MYSQLI_ASSOC)) {
                         if(isset($row5["comments"]) && $row5["authorid"] == $username2) {
                             echo'
-                            <br><span class="pt-1">•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span> &nbsp;<button class="btn btn-sm btn-danger" name="delete_comment" username="' . $row5["authorid"] . '" productid="'.$row["productid"].'" uniquecomment="' . $row5["comments"] . '"> Delete </button></span>';
+                            <br><span class="pt-1">•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span> &nbsp;<button class="btn btn-sm btn-danger" name="delete_comment" username="' . $row5["authorid"] . '" productid="'.$row["productid"].'" uniquecomment="' . $row5["comments"] . '"> Delete </button></span><br>';
                         }
                         else{
                         if(isset($row5["comments"])) {
@@ -180,10 +175,10 @@ require_once('includes/header.php');
 
                     echo '
                     <!-- form for adding a comment !-->
-                    <br> <br> <b> Add Comment: </b>
+                    <br> <br>  <span > Add Comment: </span>
                     <form id = "' . $row['productid'].'" name="comment" method="POST" class="form_comment form-inline">
                     <input name="commentinput" type="text">
-                    <button type="submit" name="postcomment" value = "' . $row['productid'].'" class="btn btn-info ml-3">Post Comment</button>
+                    <button type="submit" name="postcomment" value = "' . $row['productid'].'" class="btn ml-3">Post Comment</button>
                     </form>
                     <br>
                     '; 
