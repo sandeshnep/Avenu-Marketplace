@@ -90,4 +90,29 @@ ul{
     position: absolute;
     top: 0;
     right: 0;
+<<<<<<< HEAD
+=======
+    opacity: 0.6;
+}
+
+.img-container a:hover {
+    opacity: 1;
+}
+
+.why p {
+    text-align: center;  
+}
+
+.why .small {
+    text-align: center;  
+}
+
+.card-title{
+    text-align: center;
+    color: #00897b;
+}
+
+article p{
+    text-align: center;
+>>>>>>> f9837deb20e84b769f1d4eab6330e5ff31b12102
 }

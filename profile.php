@@ -8,15 +8,28 @@ check_cookie();
 authenticate();
 
 require_once('includes/header.php');
-
-
 ?>
-
+    <html>
     <div class="jumbotron rounded-0 p-tron">
         <div class="container">
             <h1>
                 <?php echo ' I am ' . '<span id="firstname">' . $_SESSION['firstname'] . '</span>' ?>
             </h1>
+            <?php
+                $user = $_SESSION['username'];
+                $query = "SELECT * FROM `users` WHERE username='$user'";
+                $result = mysqli_query($connect, $query);
+                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                    if(is_null($row['profpic'])){
+                        echo'<img src="img/profimg/generic-profile.jpg" height="200" width="200">';
+                        echo'<p>woop</p>';
+                    }
+                    else{
+                        echo'<img src="'.$row['profpic'].'" height="200" width="200">';
+                        echo'<p>'.$user.'</p>';
+                    }
+                }
+            ?>
         </div>
     </div>
 
@@ -82,10 +95,22 @@ require_once('includes/header.php');
     <br>
     <br>
     <br>
-
-    <form class="form" id="update_form">
+<?php
+    $user = $_SESSION['username'];
+?>
     <h3>Update account Information</h3>
+    <!-- Upload image form -->
+    <h4 class="lead">Upload Profile Picture</h4>
+        <form action="includes/profupload.php" method="POST" enctype="multipart/form-data" class="upload form-inline">
+            <input type = "file" name ="image" class = "image form-control-file" attribute ="'.$user.'"/>
+            <button type="submit" class="uploadsubmit btn btn-info">Upload</button>
+            <input type="hidden" name="idprofimg" value="'.$user.'">
+        </form>
     <br>
+    <!--Delete Button !-->
+    <button name="delete" id="'.$user.'" class="btn btn-danger btn-sm float-left">Delete Profile Photo</button>
+    <br>
+    <form class="form" id="update_form">
         <div class="row">
             <div class="col">
                 <div class="form-group">
@@ -144,6 +169,28 @@ require_once('includes/header.php');
                     })
                 });
             });
+            //-----------------------ajax for uploading pictures
+            $("body").on("submit", ".profupload", function (e) {
+
+                e.preventDefault();
+
+                //if an image is selected, run ajax
+                if ($(this).children('input')[0].files.length > 0) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "includes/profupload.php",
+                        data: new FormData(this),
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (response, textStatus, jqXHR) {
+                            $result = $(response).find("#refreshajax");
+                            $("#refreshajax").html($result);
+                        }
+                    })
+                }
+            });
         </script>
         </body>
-        </html>
+    </html>
