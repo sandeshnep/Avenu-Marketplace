@@ -23,11 +23,9 @@ require_once('includes/header.php');
                 while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                     if(is_null($row['profimg'])){
                         echo'<img src="img/profimg/generic-profile.jpg" height="200" width="200">';
-                        echo'<p>woop</p>';
                     }
                     else{
                         echo'<img src="'.$row['profimg'].'" height="200" width="200">';
-                        echo'<p>'.$user.'</p>';
                     }
                 }
             ?>
