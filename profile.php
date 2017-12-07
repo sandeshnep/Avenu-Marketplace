@@ -75,7 +75,7 @@ require_once('includes/header.php');
     <div class="container">
 
     <form method="POST">
-        <button type="submit" name="delete" class="btn btn-danger btn-lg btn-block">Delete Account</button>
+        <button type="submit" name="delete" class="btn btn-danger btn-sm float-left">Delete Account</button>
     </form>
 
     <br>
