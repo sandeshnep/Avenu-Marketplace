@@ -2,7 +2,7 @@
 
    require_once('db.php');
 
-   if(isset($_FILES['image'])){
+   if(isset($_FILES['image']) && (isset($_POST['idprofimg']))){
 
       
 
@@ -16,11 +16,11 @@
 
 
     //insert imageurl to the database
-    $username = $_SESSION['username'];
+    $username = stripslashes($_POST['idprofimg']);
     $profurl = "img/profimg/".$file_name;
 
          
-    $query2 = "UPDATE users SET profpic='$profurl' WHERE username='$username'";
+    $query2 = "UPDATE users SET profimg='$profurl' WHERE username='$username'";
     $result2 = mysqli_query($connect, $query2);
 
     $expensions= array("jpeg","jpg","png");

@@ -12,6 +12,7 @@ require_once('includes/header.php');
     <html>
     <div class="jumbotron rounded-0 p-tron">
         <div class="container">
+            <div id="refreshpic">
             <h1>
                 <?php echo ' I am ' . '<span id="firstname">' . $_SESSION['firstname'] . '</span>' ?>
             </h1>
@@ -20,17 +21,18 @@ require_once('includes/header.php');
                 $query = "SELECT * FROM `users` WHERE username='$user'";
                 $result = mysqli_query($connect, $query);
                 while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                    if(is_null($row['profpic'])){
+                    if(is_null($row['profimg'])){
                         echo'<img src="img/profimg/generic-profile.jpg" height="200" width="200">';
                         echo'<p>woop</p>';
                     }
                     else{
-                        echo'<img src="'.$row['profpic'].'" height="200" width="200">';
+                        echo'<img src="'.$row['profimg'].'" height="200" width="200">';
                         echo'<p>'.$user.'</p>';
                     }
                 }
             ?>
         </div>
+    </div>
     </div>
 
     <div class='container'>
@@ -97,12 +99,13 @@ require_once('includes/header.php');
     <br>
 <?php
     $user = $_SESSION['username'];
-?>
+
+    echo'
     <h3>Update account Information</h3>
     <!-- Upload image form -->
     <h4 class="lead">Upload Profile Picture</h4>
-        <form action="includes/profupload.php" method="POST" enctype="multipart/form-data" class="upload form-inline">
-            <input type = "file" name ="image" class = "image form-control-file" attribute ="'.$user.'"/>
+        <form action="includes/profupload.php" method="POST" enctype="multipart/form-data" class="picupload form-inline">
+            <input type = "file" name ="image" class = "image form-control-file"/>
             <button type="submit" class="uploadsubmit btn btn-info">Upload</button>
             <input type="hidden" name="idprofimg" value="'.$user.'">
         </form>
@@ -140,7 +143,7 @@ require_once('includes/header.php');
 
     </div>
     
-    <br>
+    <br>'; ?>
 
     <?php
     include("includes/footer.php");
@@ -170,7 +173,7 @@ require_once('includes/header.php');
                 });
             });
             //-----------------------ajax for uploading pictures
-            $("body").on("submit", ".profupload", function (e) {
+            $("body").on("submit", ".picupload", function (e) {
 
                 e.preventDefault();
 
@@ -185,8 +188,8 @@ require_once('includes/header.php');
                         contentType: false,
                         processData: false,
                         success: function (response, textStatus, jqXHR) {
-                            $result = $(response).find("#refreshajax");
-                            $("#refreshajax").html($result);
+                            $result = $(response).find("#refreshpic");
+                            $("#refreshpic").html($result);
                         }
                     })
                 }
