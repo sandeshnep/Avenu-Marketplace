@@ -39,7 +39,7 @@ require_once('includes/header.php');
 
             <article>
             <p>
-                Avenu is the first online marketplace desgined specifically for high school students. Upload items to your profile that you
+                Avenu is the first online marketplace desgined specifically for high school students. <br> Upload items to your profile that you
                 want to sell, or browse others' profiles for things to buy.
             </p>
             
@@ -71,7 +71,7 @@ require_once('includes/header.php');
                     <img class="card-img-top" src="img/Safe.PNG" alt="Card image cap" height="289">
                     <div class="card-body">
                         <h4 class="card-title">Safety Guaranteed</h4>
-                        <p class="card-text">Our platform ensures the safety of the safety of the students by including faculty to oversee each transaction.</p>
+                        <p class="card-text">Our platform ensures the safety of the students by including faculty to oversee each transaction.</p>
                         <p class="card-text">
                             <a href="rules.php"><small class="text-muted">Read our Rules</small></a>
                         </p>
