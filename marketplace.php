@@ -174,13 +174,15 @@ require_once('includes/header.php');
 
 
                     echo '
+                    <div >
                     <!-- form for adding a comment !-->
-                    <br> <br>  <span > Add Comment: </span>
+                    <br> <br>  Add Comment:
                     <form id = "' . $row['productid'].'" name="comment" method="POST" class="form_comment form-inline">
                     <input name="commentinput" type="text">
                     <button type="submit" name="postcomment" value = "' . $row['productid'].'" class="btn ml-3">Post Comment</button>
                     </form>
                     <br>
+                    </div>
                     '; 
                 }
                 echo '
