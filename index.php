@@ -30,21 +30,61 @@ require_once('includes/header.php');
 
     <div class="container">
 
-        <article>
+        
+        
+        
+        <div class="why">
+            <p><strong>Why Use Avenu? <br> <small class="text-muted"><em>Buying</em> and <em>selling</em> made safe and easy.</small> </strong></p>
+            <p></p>
+
+            <article>
             <p>
-                Avenu is the first online marketplace desgined specifically for high school students. Upload items to your profile that you
+                Avenu is the first online marketplace desgined specifically for high school students. <br> Upload items to your profile that you
                 want to sell, or browse others' profiles for things to buy.
             </p>
-            <p>
-                See something you like? Simply click "BUY NOW" and fill in your purchase info. We'll take care of the rest.
-            </p>
-            <p>
-                For a complete list of rules and regulations, click
-                <a href="rules.php">here.</a>
-            </p>
+            
+            
         </article>
 
-    </div>
+            <div class="card-deck">
+                <div class="card">
+                    <img class="card-img-top" src="img/Money.PNG" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">Get the Best Price</h4>
+                        <p>We help you get more money for your things by connecting you directly with a buyer. </p>
+                        <p>
+                            <a href="myproducts.php"><small class="text-muted">Sell Your Things</small></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="img/Save.PNG" alt="Card image cap" height="289">
+                    <div class="card-body">
+                        <h4 class="card-title">Save Tons</h4>
+                        <p class="card-text">We save you the time of buying from a main distributor, saving you up to 50%.</p>
+                        <p class="card-text">
+                            <a href="marketplace.php"><small class="text-muted">Browse the Marketplace</small></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="img/Safe.PNG" alt="Card image cap" height="289">
+                    <div class="card-body">
+                        <h4 class="card-title">Safety Guaranteed</h4>
+                        <p class="card-text">Our platform ensures the safety of the students by including faculty to oversee each transaction.</p>
+                        <p class="card-text">
+                            <a href="rules.php"><small class="text-muted">Read our Rules</small></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+</div>
+
+</div>
 
 <?php
 require_once("includes/footer.php");

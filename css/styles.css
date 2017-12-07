@@ -96,3 +96,20 @@ ul{
 .img-container a:hover {
     opacity: 1;
 }
+
+.why p {
+    text-align: center;  
+}
+
+.why .small {
+    text-align: center;  
+}
+
+.card-title{
+    text-align: center;
+    color: #00897b;
+}
+
+article p{
+    text-align: center;
+}
