@@ -80,7 +80,13 @@ require_once('includes/header.php');
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
+                <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter desired password">
+                </div>
+                <span id="passwordResult"></span>
+                <p>Note that your password must contain: one letter, one number, one capital letter, and at least 8 characters.</p>
+                <p>Your password cannot be the same as your username.</p>
             </div>
             <div class="form-group">
                 <label for="password2">Verify password</label>
@@ -113,6 +119,26 @@ require_once('includes/header.php');
 
         function finishAjax(id, response) {
             $('#usernameLoading').hide();
+            $('#' + id).html(unescape(response));
+            $('#' + id).fadeIn();
+        } //finishAjax
+
+        $(document).ready(function () {
+            $('#passwordLoading').hide();
+            $('#password').keyup(function (){
+                $('#passwordLoading').show();
+                $.post("includes/password-check.php", {
+                    password: $('#password').val(), username: $('#username').val()
+                }, function (response) {
+                    $('#passwordResult').fadeOut();
+                    setTimeout("finishAjax2('passwordResult', '" + escape(response) + "')", 400);
+                });
+                return false;
+            });
+        });
+
+        function finishAjax2(id, response) {
+            $('#passwordLoading').hide();
             $('#' + id).html(unescape(response));
             $('#' + id).fadeIn();
         } //finishAjax
