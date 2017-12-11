@@ -15,7 +15,7 @@ if (isset($_POST) && !empty($_POST)) {
     }elseif (strcmp($username, $password)==0) {
         echo '<div class="text-danger">Your password cannot be the same as your username.</div>';
     }else{
-    	echo '<div class="text-success">Valid password.'.$username.'</div>';
+    	echo '<div class="text-success">Valid password.</div>';
     }
 }
 

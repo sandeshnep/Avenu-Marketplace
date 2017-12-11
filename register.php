@@ -20,26 +20,34 @@ require_once('includes/header.php');
             $username = stripslashes($_POST['username']);
             $email = stripslashes($_POST['email']);
             $password = stripslashes(md5($_POST['password']));
-    
-            $query = "INSERT INTO `users` (firstname, lastname, username, password, email) VALUES ('$firstname', '$lastname', '$username', '$password', '$email')";
-            $usercheck = "SELECT * FROM `users` WHERE username='$username'";
-            $result = mysqli_query($connect, $usercheck);
-            $count = mysqli_num_rows($result);
-            if ($count == 1) {
-                echo '<div class="lead text-danger">Please use another username</div>
-                <div class="lead">Click here to <a href="register.php">try again</a></div>';
-            } else {
-                $result = mysqli_query($connect, $query);
-                if($result){
-                    echo '<div class="jumbotron alert-success">
-                    <h3>Registered successfully.</h3>
-                    <div class="lead">Click here to <a href="login.php">login</a></div>
-                    </div>';
-                } else { 
-                    echo '<div class="jumbotron alert-danger">
-                    <h3>Failed to register.</h3>
-                    <div class="lead">Click here to <a href="register.php">try again</a></div>
-                    </div>';
+
+            if($firstname=='' ||$lastname=='' || $username=='' || $email==''){
+                echo '<div class="text-danger">Your form was missing information.</div>';
+                echo '<a href="register.php">Return to Registration</a>';
+            }elseif((strlen($password) < 8)|| (!preg_match("/[A-z]/", $password)) || (!preg_match("/[A-Z]/", $password)) || (!preg_match("/\d/", $password)) || (strcmp($username, $password)==0)) {
+                echo '<div class="text-danger">You have submitted an invalid password.</div>';
+                echo '<a href="register.php">Return to Registration</a>';
+            }else{
+                $query = "INSERT INTO `users` (firstname, lastname, username, password, email) VALUES ('$firstname', '$lastname', '$username', '$password', '$email')";
+                $usercheck = "SELECT * FROM `users` WHERE username='$username'";
+                $result = mysqli_query($connect, $usercheck);
+                $count = mysqli_num_rows($result);
+                if ($count == 1) {
+                    echo '<div class="lead text-danger">Please use another username</div>
+                    <div class="lead">Click here to <a href="register.php">try again</a></div>';
+                } else {
+                    $result = mysqli_query($connect, $query);
+                    if($result){
+                        echo '<div class="jumbotron alert-success">
+                        <h3>Registered successfully.</h3>
+                        <div class="lead">Click here to <a href="login.php">login</a></div>
+                        </div>';
+                    } else { 
+                        echo '<div class="jumbotron alert-danger">
+                        <h3>Failed to register.</h3>
+                        <div class="lead">Click here to <a href="register.php">try again</a></div>
+                        </div>';
+                    }
                 }
             }
         } else {
@@ -76,6 +84,7 @@ require_once('includes/header.php');
                 <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                 <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter your email address">
                 </div>
+                <span id="emailResult"></span>
                 <small id="emailHelp" class="form-text text-muted">We won't share your email with anyone.</small>
             </div>
             <div class="form-group">
@@ -122,7 +131,7 @@ require_once('includes/header.php');
             $('#' + id).html(unescape(response));
             $('#' + id).fadeIn();
         } //finishAjax
-
+        //------------------AJAX for password check
         $(document).ready(function () {
             $('#passwordLoading').hide();
             $('#password').keyup(function (){
@@ -136,9 +145,27 @@ require_once('includes/header.php');
                 return false;
             });
         });
-
         function finishAjax2(id, response) {
             $('#passwordLoading').hide();
+            $('#' + id).html(unescape(response));
+            $('#' + id).fadeIn();
+        } //finishAjax
+        //------------------AJAX for email check
+        $(document).ready(function () {
+            $('#emailLoading').hide();
+            $('#email').keyup(function (){
+                $('#emailLoading').show();
+                $.post("includes/email-check.php", {
+                    email: $('#email').val()
+                }, function (response) {
+                    $('#emailResult').fadeOut();
+                    setTimeout("finishAjax3('emailResult', '" + escape(response) + "')", 400);
+                });
+                return false;
+            });
+        });
+        function finishAjax3(id, response) {
+            $('#emailLoading').hide();
             $('#' + id).html(unescape(response));
             $('#' + id).fadeIn();
         } //finishAjax
