@@ -136,7 +136,7 @@ if(isset($_POST['deleteimgid'])&& isset($_POST['imgnum'])){
              '<b>Product ID : </b> ' . $row['productid'] . 
              '<br><b>Description: </b>' . $row['description']  . 
              '<br><b>Date Posted: </b>' . $row['timesql'] . 
-             '<br><b>Average Rating: ' . $row3['avg_rating'] . '</b>
+             '<br><b>Average Rating: ' . round($row3['avg_rating'],2) . '</b>
              <br>
              <b> Comments :</b>
              ';

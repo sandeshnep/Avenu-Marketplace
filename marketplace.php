@@ -60,15 +60,15 @@ require_once('includes/header.php');
             
         }
 
-        if(isset($_POST['username']) && isset($_POST['productid']) && isset($_POST['uniquecomment'])){
+        if(isset($_POST['username']) && isset($_POST['productid']) && isset($_POST['uniquecommentnum'])){
 
             $author = $_POST['username'];
             $productid = $_POST['productid'];
-            $commentv = $_POST['uniquecomment'];
+            $commentv = $_POST['uniquecommentnum'];
 
             //SQL command to delete a product on to the database
 
-            $query2 = "UPDATE `reviews` SET comments = NULL WHERE productid='$productid' AND authorid='$author' AND comments='$commentv'";
+            $query2 = "UPDATE `reviews` SET comments = NULL WHERE productid='$productid' AND authorid='$author' AND num='$commentv'";
             //"DELETE FROM `reviews` WHERE productid='$productid' AND authorid='$author'";
             $result2 = mysqli_query($connect, $query2);
       }
@@ -132,7 +132,7 @@ require_once('includes/header.php');
                     '<br><br><span >Posted: </span>' . $row['timesql'] . "\r\n" .
                     '<br><span >SellerId: </span>' . $row['username'] . "\r\n" . 
                     '<br><span >Description: </span>' . $row['description'] ."\r\n" .
-                    '<br><span >Average Rating: </span>' . $row3['avg_rating'] . "\r\n" 
+                    '<br><span >Average Rating: </span>' . round($row3['avg_rating'], 2) . "\r\n" 
                     ;
                     
                     echo'
@@ -163,7 +163,7 @@ require_once('includes/header.php');
                     while($row5 = mysqli_fetch_array($result5, MYSQLI_ASSOC)) {
                         if(isset($row5["comments"]) && $row5["authorid"] == $username2) {
                             echo'
-                            <br><span class="pt-1">•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span> &nbsp;<button class="btn btn-sm btn-danger" name="delete_comment" username="' . $row5["authorid"] . '" productid="'.$row["productid"].'" uniquecomment="' . $row5["comments"] . '"> Delete </button></span><br>';
+                            <br><span class="pt-1">•  ' . $row5["comments"] . '<span class="small text-muted"> by: ' . $row5["authorid"] . '</span> &nbsp;<button class="btn btn-sm btn-danger" name="delete_comment" username="' . $row5["authorid"] . '" productid="'.$row["productid"].'" uniquecommentnum="' . $row5["num"] . '"> Delete </button></span><br>';
                         }
                         else{
                         if(isset($row5["comments"])) {
@@ -261,14 +261,14 @@ require_once('includes/header.php');
        
        var usernamev = $(this).attr("username");
        var prodid = $(this).attr("productid");
-       var commentv= $(this).attr("uniquecomment");
+       var commentv= $(this).attr("uniquecommentnum");
 
 
     $.ajax({
          url: "marketplace.php",
          method: "POST",
          dataType: "html",
-         data: {username: usernamev, productid: prodid, uniquecomment: commentv},
+         data: {username: usernamev, productid: prodid, uniquecommentnum: commentv},
         
          success: function (response) {
            //alert(response);
