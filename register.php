@@ -95,8 +95,8 @@ require_once('includes/header.php');
                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter desired password">
                 </div>
                 <span id="passwordResult"></span>
-                <p>Note that your password must contain: one letter, one number, one capital letter, and at least 8 characters.</p>
-                <p>Your password cannot be the same as your username.</p>
+                <small class="form-text text-muted">Password must contain: one letter, one number, one capital letter, and at least 8 characters.</small>
+                <small class="form-text text-muted">Your password cannot be the same as your username.</small>
             </div>
             <div class="form-group">
                 <label for="password2">Verify password</label>
