@@ -60,36 +60,45 @@ require_once('includes/header.php');
 
     <br>
 
-    <?php 
-        require_once('includes/db.php');
+<?php 
+    
+    if(isset($_POST['delete'])){
 
-        if(isset($_POST['delete'])){
+        echo'<div class="container"><h2>Are you sure you want to delete your account? This cannot be undone.</h2>
+        <form method="POST">
+            <button type="submit" name="deleteyes" class="btn btn-danger btn-sm float-left">Yes, Delete My Account.</button>
+        </form>
+        <form method="POST">
+            <button type="submit" name="deleteno" class="btn btn-danger btn-sm float-right">No, Keep My Account.</button>
+        </form>
+        </div>
+        ';
+    }
+?>
 
-            echo'<h1>DELETE BUTTON PRESSED </h1>';
+<?php
+    require_once('includes/db.php');
+    
+    if(isset($_POST['deleteyes'])){
+        //Delete a username in the database
+        $iddelete = $_SESSION['username'];
 
-            $username = $_SESSION['username'];
-            echo 'username : '. $username ;
+        //SQL command to delete a product on to the database
+        $query2 = "DELETE FROM `users` WHERE username='$iddelete'";
+        $result2 = mysqli_query($connect, $query2);
 
-
-               //Delete a username in the database
-                $query2 = "DELETE * FROM `users` WHERE username='$username'";
-                $result2 = mysqli_query($connect, $query2);
-                session_start();
-                 $_SESSION = array();
-                session_unset();
-                session_destroy();
-                //deleting cookies
-                setcookie("username", "", time()-1, "/" );
-                setcookie("password", "", time()-1, "/" );
-                header("Location:term-project-group-24/term-project-group-24/login.php");
-            }
-            ?>
+        session_destroy();
+        header("Location: index.php");
+    }
+    elseif(isset($_POST['deleteno'])){
+        header("Location: profile.php");
+    }
+?>
 
     <div class="container">
-
-    <form method="POST">
-        <button type="submit" name="delete" class="btn btn-danger btn-sm float-left">Delete Account</button>
-    </form>
+        <form method="POST">
+            <button type="submit" name="delete" class="btn btn-danger btn-sm float-left">Delete Account</button>
+        </form>
 
     <br>
     <br>
@@ -192,6 +201,11 @@ require_once('includes/header.php');
                     })
                 }
             });
+        </script>
+        <script>
+            function action() {
+                document.getElementById('deleteprof').style.visibility = 'hidden';
+            };
         </script>
         </body>
     </html>
