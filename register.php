@@ -19,13 +19,14 @@ require_once('includes/header.php');
             $lastname = stripslashes($_POST['lastname']);
             $username = stripslashes($_POST['username']);
             $email = stripslashes($_POST['email']);
+            $unhashedpass = stripslashes($_POST['password']);
             $password = stripslashes(md5($_POST['password']));
 
             if($firstname=='' ||$lastname=='' || $username=='' || $email==''){
                 echo '<div class="text-danger">Your form was missing information.</div>';
                 echo '<a href="register.php">Return to Registration</a>';
-            }elseif((strlen($password) < 8)|| (!preg_match("/[A-z]/", $password)) || (!preg_match("/[A-Z]/", $password)) || (!preg_match("/\d/", $password)) || (strcmp($username, $password)==0)) {
-                echo '<div class="text-danger">You have submitted an invalid password.</div>';
+            }elseif((strlen($unhashedpass) < 8)|| (!preg_match("/[A-z]/", $unhashedpass)) || (!preg_match("/[A-Z]/", $unhashedpass)) || (!preg_match("/\d/", $unhashedpass)) || (strcmp($username, $unhashedpass)==0)) {
+                echo '<div class="text-danger">You have submitted an invalid password.'.$password.'</div>';
                 echo '<a href="register.php">Return to Registration</a>';
             }else{
                 $query = "INSERT INTO `users` (firstname, lastname, username, password, email) VALUES ('$firstname', '$lastname', '$username', '$password', '$email')";
