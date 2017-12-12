@@ -9,6 +9,42 @@ authenticate();
 
 require_once('includes/header.php');
 ?>
+
+
+
+<?php
+    require_once('includes/db.php');
+    
+    if(isset($_POST['deleteyes'])){
+        //Delete a username in the database
+        $iddelete = $_SESSION['username'];
+
+        //SQL command to delete a product on to the database
+        $query2 = "DELETE FROM `users` WHERE username='$iddelete'";
+        $result2 = mysqli_query($connect, $query2);
+
+        session_destroy();
+        header("Location: index.php");
+    }
+    elseif(isset($_POST['deleteno'])){
+        header("Location: profile.php");
+    }
+
+
+ //DELETE PICTURES-----------------------------------------------
+    if(isset($_POST['deleteimgid'])){
+        $iddelete = $_POST['deleteimgid'];
+
+        $query3 = "UPDATE `users` SET profimg = NULL WHERE username='$iddelete'";
+        //"DELETE FROM `reviews` WHERE productid='$productid' AND authorid='$author'";
+        $result3 = mysqli_query($connect, $query3);
+      
+    }
+
+?>
+
+
+
     <html>
     <div class="jumbotron rounded-0 p-tron">
         <div class="container">
@@ -60,40 +96,7 @@ require_once('includes/header.php');
 
     <br>
 
-<?php 
-    
-    if(isset($_POST['delete'])){
 
-        echo'<div class="container"><h2>Are you sure you want to delete your account? This cannot be undone.</h2>
-        <form method="POST">
-            <button type="submit" name="deleteyes" class="btn btn-danger btn-sm float-left">Yes, Delete My Account.</button>
-        </form>
-        <form method="POST">
-            <button type="submit" name="deleteno" class="btn btn-danger btn-sm float-right">No, Keep My Account.</button>
-        </form>
-        </div>
-        ';
-    }
-?>
-
-<?php
-    require_once('includes/db.php');
-    
-    if(isset($_POST['deleteyes'])){
-        //Delete a username in the database
-        $iddelete = $_SESSION['username'];
-
-        //SQL command to delete a product on to the database
-        $query2 = "DELETE FROM `users` WHERE username='$iddelete'";
-        $result2 = mysqli_query($connect, $query2);
-
-        session_destroy();
-        header("Location: includes/logout.php");
-    }
-    elseif(isset($_POST['deleteno'])){
-        header("Location: profile.php");
-    }
-?>
 
     <div class="container">
         
@@ -113,7 +116,7 @@ require_once('includes/header.php');
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <form method="POST">
+                            <form method="POST" action="profile.php">
                             <button type="submit"  name="deleteyes"  class="btn btn-danger">Delete Account</button>
                             </form>
                         </div>
@@ -140,7 +143,9 @@ require_once('includes/header.php');
         </form>
     <br>
     <!--Delete Button !-->
-    <button name="delete" id="'.$user.'" class="btn btn-danger btn-sm float-left">Delete Profile Photo</button>
+    <form action="profile.php" method="POST" class="del_pic" id="'.$user.'">
+    <button type = "submit" name="deleteimgid" value="'.$user.'" class="btn btn-danger btn-sm float-left">Delete Profile Photo</button>
+    </form>
     <br>
     <form class="form" id="update_form">
         <div class="row">
@@ -222,6 +227,24 @@ require_once('includes/header.php');
                         }
                     })
                 }
+            });
+
+            //-----------------------ajax for deleting profile picture
+            $("body").on("submit", ".del_pic", function (e) {
+            
+                e.preventDefault();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "profile.php",
+                        dataType: "html",
+                        data: {deleteimgid: e.target.id},
+                        
+                        success: function (response) {
+                            $result2 = $(response).find("#refreshpic");
+                            $("#refreshpic").html($result2);
+                        }
+                    })
             });
         </script>
         <script>
