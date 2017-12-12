@@ -102,7 +102,8 @@ function redirect() {
     if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
         header( 'Location: index.php' ) ;
     }
-    if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
+    session_start();
+    if (isset($_SESSION['username'])) {
         header( 'Location: index.php' ) ;
     }
 }
