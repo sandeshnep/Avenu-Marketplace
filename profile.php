@@ -88,7 +88,7 @@ require_once('includes/header.php');
         $result2 = mysqli_query($connect, $query2);
 
         session_destroy();
-        header("Location: index.php");
+        header("Location: includes/logout.php");
     }
     elseif(isset($_POST['deleteno'])){
         header("Location: profile.php");
