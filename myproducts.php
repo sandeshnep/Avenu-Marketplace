@@ -17,6 +17,7 @@ require_once('includes/header.php');
     <h2>
         <?php echo '<span>' . $_SESSION['firstname'] ."'s Marketplace" . '</span>' ?>
     </h2>
+    
     <p class="lead">Add, Update or Remove Products!</p>
 </div>
 

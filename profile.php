@@ -17,11 +17,12 @@ require_once('includes/header.php');
     
     if(isset($_POST['deleteyes'])){
         //Delete a username in the database
-        $iddelete = $_SESSION['username'];
+        $iddelete1 = $_POST['deleteyes'];
+
 
         //SQL command to delete a product on to the database
-        $query2 = "DELETE FROM `users` WHERE username='$iddelete'";
-        $result2 = mysqli_query($connect, $query2);
+        $query12 = "DELETE FROM `users` WHERE username='$iddelete1'";
+        $result12 = mysqli_query($connect, $query12);
 
         session_destroy();
         header("Location: index.php");
@@ -96,7 +97,7 @@ require_once('includes/header.php');
 
     <br>
 
-
+<?php echo'
 
     <div class="container">
         
@@ -116,8 +117,8 @@ require_once('includes/header.php');
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <form method="POST" action="profile.php">
-                            <button type="submit"  name="deleteyes"  class="btn btn-danger">Delete Account</button>
+                            <form method="POST" action="profile.php" class="deleteuser" id="'.$_SESSION["username"].'">
+                            <button type="submit"  name="deleteyes" value="'.$_SESSION["username"].'" class="btn btn-danger">Delete Account</button>
                             </form>
                         </div>
                     </div>
@@ -129,7 +130,8 @@ require_once('includes/header.php');
     <br>
     <br>
     <br>
-<?php
+    '; 
+
     $user = $_SESSION['username'];
 
     echo'
@@ -246,6 +248,8 @@ require_once('includes/header.php');
                         }
                     })
             });
+
+           
         </script>
         <script>
             function action() {
