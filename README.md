@@ -1,6 +1,5 @@
-# CSC 210 project README file
-
-    By Zubair, Lydia, Teron, Sandesh, and Rhythm
+# ReadMe
+    In collaboration with Zubair, Lydia, Teron and Rhythm
 
 # Introduction
     Avenu is a Web 2.0 style web app that is a marketplace for high school students. Technologies used: JavaScript, Ajax,           jQuery, PHP, mySQL, CSS, BootStrap, HTML
